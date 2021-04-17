@@ -234,13 +234,14 @@ namespace Routing
                         string url = "http://localhost:8733/Design_Time_Addresses/WebProxyService/Service1/rest/Station?contract=" +
                         station.contractName + "&id=" + station.number;
                         string responseData = webClient.DownloadString(url);
-                        File.WriteAllText("C:\\Users\\dyiem\\OneDrive\\Bureau\\e.txt", responseData);
                         Station stationCheck = JsonConvert.DeserializeObject<Station>(responseData);
 
                         double distanceToDepartStation = clientstartCoordinate.GetDistanceTo(new GeoCoordinate(stationCheck.position.latitude,
                             stationCheck.position.longitude));
 
                         double departureToEnd = clientstartCoordinate.GetDistanceTo(clientendCoordinate);
+                        File.WriteAllText("C:\\Users\\dyiem\\OneDrive\\Bureau\\e.txt", distanceToDepartStation.ToString() + "\n" + departureToEnd.ToString());
+
 
                         if ( departureToEnd < distanceToDepartStation )
                         {
