@@ -1,0 +1,14 @@
+C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\Routing\bin\Debug\Routing.dll.config
+C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\Routing\bin\Debug\Routing.dll
+C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\Routing\bin\Debug\Routing.pdb
+C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\Routing\obj\Debug\Routing.csprojAssemblyReference.cache
+C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\Routing\obj\Debug\Routing.csproj.CoreCompileInputs.cache
+C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\Routing\obj\Debug\Routing.dll
+C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\Routing\obj\Debug\Routing.pdb
+C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\Routing\bin\Debug\WebProxyService.dll
+C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\Routing\bin\Debug\Newtonsoft.Json.dll
+C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\Routing\bin\Debug\WebProxyService.pdb
+C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\Routing\bin\Debug\WebProxyService.dll.config
+C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\Routing\bin\Debug\Newtonsoft.Json.xml
+C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\Routing\obj\Debug\Routing.csproj.CopyComplete
+C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\Routing\bin\Debug\WebHttpBehaviorExtensions.dll
