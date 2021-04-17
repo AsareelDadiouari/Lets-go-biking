@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Routing.JSONClasses" />
+  <xs:element name="getContract">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getContractResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="getContractResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetGeoData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="departure" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="arrival" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetGeoDataResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Routing.JSONClasses" minOccurs="0" name="GetGeoDataResult" nillable="true" type="q1:ArrayOfGeo.GeoJson" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

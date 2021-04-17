@@ -53,7 +53,7 @@ namespace Routing
         {
             ctx.OutgoingResponse.Headers.Add("Access-Control-Allow-Origin", "*");
             ctx.OutgoingResponse.Headers.Add("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, HEAD, OPTIONS");
-            throw new NotImplementedException();
+            return "bro";
         }
 
         public Task<List<Geo.GeoJson>> GetGeoData(string departure, string arrival)
@@ -241,7 +241,6 @@ namespace Routing
 
                         double departureToEnd = clientstartCoordinate.GetDistanceTo(clientendCoordinate);
                         File.WriteAllText("C:\\Users\\dyiem\\OneDrive\\Bureau\\e.txt", distanceToDepartStation.ToString() + "\n" + departureToEnd.ToString());
-
 
                         if ( departureToEnd < distanceToDepartStation )
                         {
