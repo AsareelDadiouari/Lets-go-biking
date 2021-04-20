@@ -1,16 +1,7 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using RestSharp;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
-using System.ServiceModel;
-using System.Text;
 using System.Threading.Tasks;
 using WebProxyService.JSONClasses;
 
@@ -61,26 +52,9 @@ namespace WebProxyService
 
         public Task<Station> GetOneStation(string contractName, int stationId)
         {
-            string url = "https://api.jcdecaux.com/vls/v3/stations/" + stationId.ToString() + "?contract=" + contractName + "&apiKey=" + apiKey;
             ctx.OutgoingResponse.Headers.Add("Access-Control-Allow-Origin", "*");
             ctx.OutgoingResponse.Headers.Add("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, HEAD, OPTIONS");
-            using(WebClient webClient = new WebClient())
-            {
-                if (!cache.Contains(stationId.ToString()))
-                {
-                    try
-                    {
-                        string response = webClient.DownloadString(url);
-                        Station station = JsonConvert.DeserializeObject<Station>(response);
-                        cache.Add(stationId.ToString(), station);
-                    }
-                    catch (Exception e)
-                    {
-                        cache.Add(stationId.ToString(), new Station());
-                    }
-                }
-            }
-            return Task.FromResult(cache.Get(stationId.ToString()));
+            return Task.FromResult(cache.Get(stationId.ToString() + "-" + contractName));
         }
 
         public Task<List<Station>> GetStations()

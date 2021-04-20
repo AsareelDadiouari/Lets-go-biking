@@ -5,19 +5,10 @@ using System.Collections.Generic;
 using System.Data.Services.Client;
 using System.Device.Location;
 using System.Globalization;
-using System.IO;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web.Caching;
-using WebProxyService;
 using WebProxyService.JSONClasses;
-using static WebProxyService.Service1;
 
 namespace Routing
 {
@@ -236,11 +227,12 @@ namespace Routing
                         string responseData = webClient.DownloadString(url);
                         Station stationCheck = JsonConvert.DeserializeObject<Station>(responseData);
 
+
                         double distanceToDepartStation = clientstartCoordinate.GetDistanceTo(new GeoCoordinate(stationCheck.position.latitude,
                             stationCheck.position.longitude));
 
                         double departureToEnd = clientstartCoordinate.GetDistanceTo(clientendCoordinate);
-                        File.WriteAllText("C:\\Users\\dyiem\\OneDrive\\Bureau\\e.txt", distanceToDepartStation.ToString() + "\n" + departureToEnd.ToString());
+                        //File.WriteAllText("C:\\Users\\dyiem\\OneDrive\\Bureau\\e.txt", distanceToDepartStation.ToString() + "\n" + departureToEnd.ToString());
 
                         if ( departureToEnd < distanceToDepartStation )
                         {

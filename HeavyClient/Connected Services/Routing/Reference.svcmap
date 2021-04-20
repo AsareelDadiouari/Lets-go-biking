@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="f19140dc-209c-4d8f-985f-8ac165403433" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ed0f9529-eb7f-4ea5-bb21-a663d118d6df" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,13 +22,13 @@
     <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/Routing/Service1/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="cc9f212f-0c11-45a8-ba0b-4d8001423727" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?disco" />
-    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="f69c1bd5-6545-402d-9db7-c92a148e2f0b" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?xsd=xsd1" />
-    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="e80406fd-b207-49ed-ba8c-8fd60d846c21" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?xsd=xsd0" />
-    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="567fc60f-7843-4111-a4cd-35f1f32f9256" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?xsd=xsd3" />
-    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="53e5a2a2-9481-40a3-8ca1-7af9d09b0c59" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?xsd=xsd2" />
-    <MetadataFile FileName="item4.xsd" MetadataType="Schema" ID="4f8a9de4-b5a5-41bf-acea-8dd5dbcbd9c8" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?xsd=xsd4" />
-    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="063a31ca-1901-43c8-9612-71fde81632a5" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?wsdl" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="64730543-2fb9-43ec-b5b8-39ae86ef4278" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?disco" />
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="843d2548-8cd3-4e5e-a744-7c43d77835d8" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?xsd=xsd1" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="fd28edf3-ae6e-42ab-8793-4a9649a3bd0f" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?xsd=xsd0" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="450a5592-52c0-435d-b225-ccdeb66eb27c" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?xsd=xsd3" />
+    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="a21d1820-76bf-4cc6-9973-0bdd3f319b84" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?xsd=xsd2" />
+    <MetadataFile FileName="item4.xsd" MetadataType="Schema" ID="a5f03c0d-bcab-45c6-8530-71a7f2aa7109" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?xsd=xsd4" />
+    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="a03610fe-51a4-4d66-b26a-7f2953776f4b" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
