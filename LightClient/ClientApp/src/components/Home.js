@@ -50,7 +50,7 @@ export class Home extends Component {
         e.preventDefault();
         this.manageSpaces();
         this.url = "http://localhost:8733/Design_Time_Addresses/Routing/Service1/rest/GeoData?start=" + this.state.departure + "&end=" + this.state.arrival
-
+        console.log(this.state.departure, this.state.arrival)
         await axios.get(this.url, this.config).then((response) => {
             if (response.data.bbox !== null) {
                 this.props.history.push({

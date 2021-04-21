@@ -17,6 +17,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeavyClient", "HeavyClient\
 		{2DD822B8-16E6-4383-BAF5-FD15872DFCB7} = {2DD822B8-16E6-4383-BAF5-FD15872DFCB7}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F7856868-D698-4400-A3FD-9B621E54468A}"
+	ProjectSection(SolutionItems) = preProject
+		runAll.cmd = runAll.cmd
+		Startup.cs = Startup.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

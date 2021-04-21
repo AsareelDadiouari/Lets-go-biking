@@ -33,7 +33,7 @@ namespace HeavyClient.Data.ViewModels
             //Setting default view
             MyMap.SetView(new Location(this.geoJsons[0].features[0].geometry.coordinates[0][1],
                 this.geoJsons[0].features[0].geometry.coordinates[0][0]), 15);
-            //myMap.Mode = new AerialMode(false);
+            //MyMap.Mode = new AerialMode(false);
             Setup();
         }
 
@@ -116,7 +116,6 @@ namespace HeavyClient.Data.ViewModels
             {
                 MyMap.Children.Add(pins[i]);
             }
-            File.WriteAllText("C:\\Users\\dyiem\\OneDrive\\Bureau\\lourd.txt", locs.Count.ToString());
             //Adding last pin
             Pushpin pinFinal = new Pushpin()
             {

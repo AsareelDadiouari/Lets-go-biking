@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Globalization;
+using System.Threading.Tasks;
+using WebProxyService.JSONClasses;
 
 namespace Routing
 {
@@ -7,12 +10,20 @@ namespace Routing
         public string longitude { get; set; }
         public string latitude { get; set; }
         public string pos { get; set; }
-        public Coord(Task<string> posititon)
+        public Coord(Task<string> position)
         {
-            this.pos = posititon.Result; 
+            this.pos = position.Result; 
             string[] arr = this.pos.Split(',');
-            longitude = arr[0];
-            latitude = arr[1];
+            this.longitude = arr[0];
+            this.latitude = arr[1];
+        }
+
+        public Position ToPosition()
+        {
+            Position position = new Position();
+            position.latitude = double.Parse(latitude, CultureInfo.InvariantCulture);
+            position.longitude = double.Parse(longitude, CultureInfo.InvariantCulture);
+            return position;
         }
 
         public override string ToString()

@@ -7,6 +7,36 @@ namespace WebProxyService.JSONClasses
     {
         public double latitude { get; set; }
         public double longitude { get; set; }
+
+        public Position(double lat, double lon)
+        {
+            this.latitude = lat;
+            this.longitude = lon;
+        }
+
+        public Position()
+        {
+
+        }
+
+        public double getDistanceTo(Position other)
+        {
+            /*var d1 = latitude * (Math.PI / 180.0);
+            var num1 = longitude * (Math.PI / 180.0);
+            var d2 = other.latitude * (Math.PI / 180.0);
+            var num2 = other.longitude * (Math.PI / 180.0) - num1;
+            var d3 = Math.Pow(Math.Sin((d2 - d1) / 2.0), 2.0) + Math.Cos(d1) * Math.Cos(d2) * Math.Pow(Math.Sin(num2 / 2.0), 2.0);
+
+            return 6376500.0 * (2.0 * Math.Atan2(Math.Sqrt(d3), Math.Sqrt(1.0 - d3)));*/
+            return Math.Sqrt(Math.Pow(other.longitude - longitude, 2) + Math.Pow(other.latitude - latitude, 2));
+
+        }
+
+        public override bool Equals(object obj)
+        {
+            Position other = (Position)obj;
+            return this.latitude == other.latitude && this.longitude == other.longitude;
+        }
     }
 
     public class Availabilities
