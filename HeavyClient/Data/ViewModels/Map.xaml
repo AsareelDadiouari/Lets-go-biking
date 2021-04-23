@@ -10,10 +10,18 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Map">
     <Grid>
-        <m:Map CredentialsProvider="CtZIdPSZBTCy9fZTEl71~wC65EwYLEkzMYSpTYg32nw~AoMVtPXE6rJFSrC0ybreB_BqDc1Im6VL36CaJIJUdtkh969Ca_apOmYTZtrO7jj-"
+        <TabControl>
+            <TabItem Header="Map">
+                <m:Map CredentialsProvider="CtZIdPSZBTCy9fZTEl71~wC65EwYLEkzMYSpTYg32nw~AoMVtPXE6rJFSrC0ybreB_BqDc1Im6VL36CaJIJUdtkh969Ca_apOmYTZtrO7jj-"
                x:Name="MyMap" />
-        <!--<controls:MapControl x:Name="mapControl" DockPanel.Dock="Top" ZoomInteractionMode="GestureAndControl"
+                <!--<controls:MapControl x:Name="mapControl" DockPanel.Dock="Top" ZoomInteractionMode="GestureAndControl"
                     TiltInteractionMode="GestureAndControl" MapServiceToken="CtZIdPSZBTCy9fZTEl71~wC65EwYLEkzMYSpTYg32nw~AoMVtPXE6rJFSrC0ybreB_BqDc1Im6VL36CaJIJUdtkh969Ca_apOmYTZtrO7jj-" 
                              /> -->
+            </TabItem>
+            <TabItem Header="Details" x:Name="detailsItem">
+                
+            </TabItem>
+        </TabControl>
+
     </Grid>
 </Page>

@@ -36,6 +36,8 @@ namespace Routing
                 this.allStations = JsonConvert.DeserializeObject<List<Station>>(responseDataFromAllStation);
                 this.StationsGeocoordinates = convertStationsToGeo(this.allStations);
             }
+            closestDepartureStation = new Station();
+            closestArrivalStation = new Station();
         }
 
         private static void OnSendingRequest(object sender, SendingRequestEventArgs e)
@@ -70,11 +72,8 @@ namespace Routing
 
             Coord clientStart = new Coord(dep);
             Coord clientEnd = new Coord(arr);
-
-            /*if (!findClosestStations(clientStart, clientEnd))
-                return Task.FromResult(new List<Geo.GeoJson>());*/
             
-            findClosestStations2(new GeoCoordinate(double.Parse(clientStart.latitude, CultureInfo.InvariantCulture), double.Parse(clientStart.longitude, CultureInfo.InvariantCulture)),
+            findClosestStations(new GeoCoordinate(double.Parse(clientStart.latitude, CultureInfo.InvariantCulture), double.Parse(clientStart.longitude, CultureInfo.InvariantCulture)),
                 new GeoCoordinate(double.Parse(clientEnd.latitude, CultureInfo.InvariantCulture), double.Parse(clientEnd.longitude, CultureInfo.InvariantCulture)));
 
             if (closestArrivalStation != null && closestDepartureStation != null)
@@ -198,7 +197,7 @@ namespace Routing
             }
         }
 
-        private void findClosestStations2(GeoCoordinate start, GeoCoordinate end)
+        private void findClosestStations(GeoCoordinate start, GeoCoordinate end)
         {
             var sortedFromStart = StationsGeocoordinates.OrderBy(x => x.GetDistanceTo(start)).ToList();
             var sortedFromEnd = StationsGeocoordinates.OrderBy(x => x.GetDistanceTo(end)).ToList();
@@ -219,38 +218,13 @@ namespace Routing
                         if (sta.status == "OPEN" && sta.mainStands.availabilities.bikes >=1)
                         {
                             this.closestDepartureStation = sta;
-                            break;
-                        }
-                    }
-                    catch (Exception e)
-                    {
 
-                    }
-                }
-                indice++;
-            }
-
-            indice = 0;
-            while (indice < this.allStations.Count)
-            {
-                Position pos = new Position(sortedFromEnd[indice].Latitude, sortedFromEnd[indice].Longitude);
-                Station tempDep = this.allStations.Find(x => x.position.Equals(pos));
-                using (WebClient webClient = new WebClient())
-                {
-                    try
-                    {
-                        string url = "http://localhost:8733/Design_Time_Addresses/WebProxyService/Service1/rest/Station?contract=" +
-                        tempDep.contractName + "&id=" + tempDep.number;
-                        string response = webClient.DownloadString(url);
-                        Station sta = JsonConvert.DeserializeObject<Station>(response);
-                        if (sta.status == "OPEN" && sta.mainStands.availabilities.stands >= 1)
-                        {
-                            this.closestArrivalStation = sta;
-                            if (this.closestDepartureStation.address.Equals(this.closestArrivalStation.address))
+                            if (start.GetDistanceTo(new GeoCoordinate(sta.position.latitude, sta.position.longitude)) > start.GetDistanceTo(end))
                             {
-                                this.closestArrivalStation = null;
-                                this.closestDepartureStation = null;
+                                closestDepartureStation = null;
+                                closestArrivalStation = null;
                             }
+
                             break;
                         }
                     }
@@ -261,6 +235,41 @@ namespace Routing
                 }
                 indice++;
             }
+
+            if (closestDepartureStation != null)
+            {
+                indice = 0;
+                while (indice < this.allStations.Count)
+                {
+                    Position pos = new Position(sortedFromEnd[indice].Latitude, sortedFromEnd[indice].Longitude);
+                    Station tempDep = this.allStations.Find(x => x.position.Equals(pos));
+                    using (WebClient webClient = new WebClient())
+                    {
+                        try
+                        {
+                            string url = "http://localhost:8733/Design_Time_Addresses/WebProxyService/Service1/rest/Station?contract=" +
+                            tempDep.contractName + "&id=" + tempDep.number;
+                            string response = webClient.DownloadString(url);
+                            Station sta = JsonConvert.DeserializeObject<Station>(response);
+                            if (sta.status == "OPEN" && sta.mainStands.availabilities.stands >= 1)
+                            {
+                                this.closestArrivalStation = sta;
+                                if (this.closestDepartureStation.address.Equals(this.closestArrivalStation.address))
+                                {
+                                    this.closestArrivalStation = null;
+                                    this.closestDepartureStation = null;
+                                }
+                                break;
+                            }
+                        }
+                        catch (Exception e)
+                        {
+
+                        }
+                    }
+                    indice++;
+                }
+            }   
         }
 
         private List<GeoCoordinate> convertStationsToGeo(List<Station> stations)

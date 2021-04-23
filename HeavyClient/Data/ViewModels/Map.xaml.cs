@@ -34,10 +34,11 @@ namespace HeavyClient.Data.ViewModels
             MyMap.SetView(new Location(this.geoJsons[0].features[0].geometry.coordinates[0][1],
                 this.geoJsons[0].features[0].geometry.coordinates[0][0]), 15);
             //MyMap.Mode = new AerialMode(false);
-            Setup();
+            MapSetup();
+            DetailsSetup();
         }
 
-        private void Setup()
+        private void MapSetup()
         {
             LocationCollection locs = new LocationCollection();
             List<MapPolyline> mapPolylines = new List<MapPolyline>();
@@ -45,64 +46,88 @@ namespace HeavyClient.Data.ViewModels
 
             foreach (var data in this.geoJsons.Select((value, index) => new { value, index }))
             {
-                foreach (var feature in data.value.features)
+                foreach (var feature in data.value.features.Select((value, index) => new { value, index }))
                 {
-                    foreach (var coordinate in feature.geometry.coordinates)
+                    switch (data.index)
+                    {
+                        case 0:
+
+                            MapPolyline routeLine = new MapPolyline()
+                            {
+                                Stroke = new SolidColorBrush(Colors.Red),
+                                StrokeThickness = 4
+                            };
+                            routeLine.Locations = new LocationCollection();
+                            
+                            foreach(var loc in feature.value.geometry.coordinates)
+                            {
+                                routeLine.Locations.Add(new Location(loc[1], loc[0]));
+                            }
+
+                            mapPolylines.Add(routeLine);
+
+                            Pushpin pin = new Pushpin()
+                            {
+                                Location = new Location(feature.value.geometry.coordinates[0][1],
+                                feature.value.geometry.coordinates[0][0]),
+                                ToolTip = "Departure",
+                            };
+                            pins.Add(pin);
+                            break;
+                        case 1:
+
+                            MapPolyline routeLine2 = new MapPolyline()
+                            {
+                                Stroke = new SolidColorBrush(Colors.Yellow),
+                                StrokeThickness = 4
+                            };
+                            routeLine2.Locations = new LocationCollection();
+
+                            foreach (var loc in feature.value.geometry.coordinates)
+                            {
+                                routeLine2.Locations.Add(new Location(loc[1], loc[0]));
+                            }
+
+                            mapPolylines.Add(routeLine2);
+
+                            Pushpin pin1 = new Pushpin()
+                            {
+                                Location = new Location(feature.value.geometry.coordinates[0][1],
+                                feature.value.geometry.coordinates[0][0]),
+                                ToolTip = "Departure Station"
+                            };
+                            pins.Add(pin1);
+                            break;
+                        case 2:
+
+                            MapPolyline routeLine3 = new MapPolyline()
+                            {
+                                Stroke = new SolidColorBrush(Colors.LightGreen),
+                                StrokeThickness = 4
+                            };
+                            routeLine3.Locations = new LocationCollection();
+
+                            foreach (var loc in feature.value.geometry.coordinates)
+                            {
+                                routeLine3.Locations.Add(new Location(loc[1], loc[0]));
+                            }
+
+                            mapPolylines.Add(routeLine3);
+
+                            Pushpin pin2 = new Pushpin()
+                            {
+                                Location = new Location(feature.value.geometry.coordinates[0][1],
+                                feature.value.geometry.coordinates[0][0]),
+                                ToolTip = "Arrival Station"
+                            };
+                            pins.Add(pin2);
+                            break;
+                    }
+
+                    foreach (var coordinate in feature.value.geometry.coordinates)
                     {
                         locs.Add(new Location(coordinate[1], coordinate[0]));
                     }
-                }
-
-                switch(data.index)
-                {
-                    case 0:
-                        MapPolyline routeLine = new MapPolyline()
-                        {
-                            Locations = locs,
-                            Stroke = new SolidColorBrush(Colors.Red),
-                            StrokeThickness = 5
-                        };
-                        Pushpin pin = new Pushpin()
-                        {
-                            Location = locs[data.index]
-                        };
-
-                        pins.Add(pin);
-                        mapPolylines.Add(routeLine);
-                        locs.Clear();
-                        break;
-
-                    case 1:
-                        MapPolyline routeLine2 = new MapPolyline()
-                        {
-                            Locations = locs,
-                            Stroke = new SolidColorBrush(Colors.Yellow),
-                            StrokeThickness = 5
-                        };
-                        Pushpin pin2 = new Pushpin()
-                        {
-                            Location = locs[0]
-                        };
-
-                        pins.Add(pin2);
-                        mapPolylines.Add(routeLine2);
-                        break;
-
-                    case 2:
-                        MapPolyline routeLine3 = new MapPolyline()
-                        {
-                            Locations = locs,
-                            Stroke = new SolidColorBrush(Colors.Green),
-                            StrokeThickness = 5
-                        };
-                        Pushpin pin3 = new Pushpin()
-                        {
-                            Location = locs[0]
-                        };
-
-                        pins.Add(pin3);
-                        mapPolylines.Add(routeLine3);
-                        break;
                 }
             }
 
@@ -119,11 +144,16 @@ namespace HeavyClient.Data.ViewModels
             //Adding last pin
             Pushpin pinFinal = new Pushpin()
             {
-                Location = locs.Count - 1 > 0 ? locs[locs.Count - 1] : locs[0]
+                Location = locs[locs.Count - 1],
+                ToolTip = "Arrival"
             };
-
+            
             MyMap.Children.Add(pinFinal);
         }
 
+        private void DetailsSetup()
+        {
+            detailsItem.Content = "Hum Charal !";
+        }
     }
 }

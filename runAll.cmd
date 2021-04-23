@@ -1,5 +1,3 @@
-csc Startup.cs /r:WebProxyService.dll /r:Routing.dll
-#powershell -command "Start-Sleep -s 5"
-#ping 192.0.2.2 -n 1 -w 5000 > nul
-#del nul
-cmd.exe /c Startup.exe
+del Launch.exe
+csc Startup.cs /r:WebProxyService/bin/Debug/WebProxyService.dll /r:Routing/bin/Debug/Routing.dll /out:Launch.exe /pdb:WebProxyService/bin/Debug/WebProxyService.pdb /pdb:Routing/bin/Debug/Routing.pdb -additionalfile:WebProxyService/bin/Debug/WebProxyService.dll.config -additionalfile:Routing/bin/Debug/Routing.dll.config
+REM Launch.exe
