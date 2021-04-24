@@ -1,22 +1,11 @@
 ﻿using HeavyClient.Routing;
-using Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT;
-using Microsoft.Toolkit.Wpf.UI.Controls;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Microsoft.Maps.MapControl.WPF;
-using System.IO;
+using LiveCharts;
+using LiveCharts.Wpf;
 
 namespace HeavyClient.Data.ViewModels
 {
@@ -32,7 +21,7 @@ namespace HeavyClient.Data.ViewModels
             this.geoJsons = geoJsons;
             //Setting default view
             MyMap.SetView(new Location(this.geoJsons[0].features[0].geometry.coordinates[0][1],
-                this.geoJsons[0].features[0].geometry.coordinates[0][0]), 15);
+            this.geoJsons[0].features[0].geometry.coordinates[0][0]), 15);
             //MyMap.Mode = new AerialMode(false);
             MapSetup();
             DetailsSetup();
@@ -153,7 +142,40 @@ namespace HeavyClient.Data.ViewModels
 
         private void DetailsSetup()
         {
-            detailsItem.Content = "Hum Charal !";
+            double dur = 0, dist = 0;
+            //Set Steps
+            foreach (var element in this.geoJsons)
+            {
+                foreach (var segment in element.features[0].properties.segments)
+                {
+                    foreach (var step in segment.steps)
+                    {
+                        directions.Items.Add(new ListBoxItem()
+                        {
+                            Content = step.instruction
+                        });
+                    }
+
+                    dur += segment.duration;
+                    dist += segment.distance;
+                }
+            }
+
+            Distance.Content = (dist/1000).ToString() + "km";
+            Duration.Content = (dur/3600) + "h";
+
+            int lastSize = this.geoJsons[this.geoJsons.Length - 1].features[0].properties.segments[0].steps.Length - 1;
+            DepartAdress.Content = this.geoJsons[0].features[0].properties.segments[0].steps[0].name;
+            ArriveAdress.Content = this.geoJsons[this.geoJsons.Length - 1].features[0]
+                .properties.segments[0].steps[lastSize - 1].name;
+
+            
+            ColumnSeries columnSeries = new ColumnSeries
+            {
+                Values = new ChartValues<double> { 10 },
+            };
+
+            chart.Series.Add(columnSeries);
         }
     }
 }

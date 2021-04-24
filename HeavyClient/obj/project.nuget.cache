@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "EZn2tFWykWz4xYycVKkbk1W4C4hjibRrilS4yF+SfjduzGF90JnbGO02ioUFfvaMO2xQ3b6PX5OsqyagmWRkew==",
+  "dgSpecHash": "hF9cvt4J4WNK/vPWaCLXPXmHJoHwYEp9VdwCqNPdSY4/MaLjlIwoINkzSoAzFw5DWJ8zJSMfLa3CBrAmpap9tg==",
   "success": true,
   "projectFilePath": "C:\\Users\\dyiem\\OneDrive\\Bureau\\ProjetWS\\LetsGoBiking\\HeavyClient\\HeavyClient.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\dyiem\\.nuget\\packages\\livecharts\\0.9.7\\livecharts.0.9.7.nupkg.sha512",
+    "C:\\Users\\dyiem\\.nuget\\packages\\livecharts.wpf\\0.9.7\\livecharts.wpf.0.9.7.nupkg.sha512",
     "C:\\Users\\dyiem\\.nuget\\packages\\microsoft.maps.mapcontrol.wpf\\1.0.0.3\\microsoft.maps.mapcontrol.wpf.1.0.0.3.nupkg.sha512",
     "C:\\Users\\dyiem\\.nuget\\packages\\microsoft.vcrtforwarders.140\\1.0.6\\microsoft.vcrtforwarders.140.1.0.6.nupkg.sha512"
   ],

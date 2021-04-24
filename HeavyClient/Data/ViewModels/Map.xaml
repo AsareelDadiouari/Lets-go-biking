@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:HeavyClient.Data.ViewModels"
       xmlns:controls="clr-namespace:Microsoft.Toolkit.Wpf.UI.Controls;assembly=Microsoft.Toolkit.Wpf.UI.Controls"
       xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
+      xmlns:liveCharts="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
     mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Map">
@@ -19,9 +20,53 @@
                              /> -->
             </TabItem>
             <TabItem Header="Details" x:Name="detailsItem">
-                
+                <StackPanel Orientation="Vertical" Width="Auto">
+                    <!-- Part 1 -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Background="AliceBlue" Height="200">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Departure:" FontSize="20" />
+                                <Label Content="Adress" FontSize="20"  x:Name="DepartAdress" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Arrival:" FontSize="20" />
+                                <Label Content="Adress" FontSize="20"  x:Name="ArriveAdress" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Total Distance:" FontSize="20" />
+                                <Label Content="1000.2" FontSize="20"  x:Name="Distance" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Total Duration:" FontSize="20" />
+                                <Label Content="1000.2" FontSize="20"  x:Name="Duration" />
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Height="198" Width="409" MaxWidth="400" Margin="90,0,0,0" Orientation="Vertical">
+                            <ListBox x:Name="directions" Height="198" MaxWidth="409"  Width="Auto" />
+                        </StackPanel>
+                    </StackPanel>
+                    <!-- Part 2 -->
+                    <StackPanel Orientation="Horizontal" Height="222" Background="LavenderBlush">
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="Most visited Stations" FontSize="20" />
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Departure:" FontSize="20" />
+                                <Label Content="DepartureStation" x:Name="mostVDeparture" FontSize="20" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Arrival:" FontSize="20" />
+                                <Label Content="ArrivalStation" x:Name="mostVArrival" FontSize="20" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Margin="120,0,0,0" HorizontalAlignment="Right" Background="Beige" Width="412" >
+                            <liveCharts:CartesianChart x:Name="chart" Height="178" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
             </TabItem>
         </TabControl>
 
     </Grid>
+
 </Page>

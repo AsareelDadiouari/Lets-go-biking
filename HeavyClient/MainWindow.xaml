@@ -5,10 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HeavyClient"
         mc:Ignorable="d"
-        Title="Let's go Biking" Height="450" Width="800"
+        Title="Let's go Biking" Height="500" Width="800"
         Icon="/Assets/logo_small_icon_only.png"
+        ResizeMode="CanResizeWithGrip"
         >
     <Grid>
-        <Frame Source="/Data/ViewModels/MainMenu.xaml" />
+        <DockPanel>
+            <Menu Width="Auto" DockPanel.Dock="Top" x:Name="menu" />
+        </DockPanel>
+        <Frame x:Name="mainMenu" Margin="0,22,0,0" Source="/Data/ViewModels/MainMenu.xaml"/>
     </Grid>
 </Window>

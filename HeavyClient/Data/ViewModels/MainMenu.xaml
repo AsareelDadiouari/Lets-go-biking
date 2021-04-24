@@ -8,10 +8,10 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Let's Go Biking">
 
-    <Grid>
+    <Grid x:Name="mainMenu">
         <StackPanel Orientation="Vertical">
             <StackPanel.Background>
-                <SolidColorBrush Color="Azure" />
+                <SolidColorBrush Color="#FCF6F5FF" />
             </StackPanel.Background>
 
             <Image x:Name="Logo" Height="169" Width="307" Source="/Assets/logo_small.png"/>
@@ -21,7 +21,7 @@
                         <Setter Property="Margin" Value="0,0,0,0"/>
                     </Style>
                 </StackPanel.Resources>
-                <Image x:Name="Icon1" Margin="0,0,100,0" Height="169" Width="100" Source="/Assets/logo_small_icon_only_inverted.png" RenderTransformOrigin="0.511,0.259"/>
+                <!--<Image x:Name="Icon1" Margin="0,0,100,0" Height="169" Width="100" Source="/Assets/logo_small_icon_only_inverted.png" RenderTransformOrigin="0.511,0.259"/>-->
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Label Margin="0,0,10,0" Content="Departure:" FontSize="24" Width="124" />
@@ -37,7 +37,7 @@
                     <Separator Opacity="0" Height="20"/>
                     <Button Click="Search_Click" Margin="0,20,0,0" x:Name="Search" Content="Search" FontSize="16" Width="132" Height="45"  />
                 </StackPanel>
-                <Image x:Name="Icon2" Margin="100,0,0,0" Height="169" Width="100" Source="/Assets/logo_small_icon_only_inverted.png"/>
+                <!--<Image x:Name="Icon2" Margin="100,0,0,0" Height="169" Width="100" Source="/Assets/logo_small_icon_only_inverted.png"/>-->
             </StackPanel>
         </StackPanel>
     </Grid>

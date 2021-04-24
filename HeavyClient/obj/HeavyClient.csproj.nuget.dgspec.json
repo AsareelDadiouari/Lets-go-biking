@@ -40,6 +40,10 @@
       "frameworks": {
         "net472": {
           "dependencies": {
+            "LiveCharts.Wpf": {
+              "target": "Package",
+              "version": "[0.9.7, )"
+            },
             "Microsoft.Maps.MapControl.WPF": {
               "target": "Package",
               "version": "[1.0.0.3, )"

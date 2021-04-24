@@ -1,7 +1,6 @@
 C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\HeavyClient\bin\Debug\HeavyClient.exe.config
 C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\HeavyClient\bin\Debug\HeavyClient.exe
 C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\HeavyClient\bin\Debug\HeavyClient.pdb
-C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\HeavyClient\obj\Debug\HeavyClient.csprojAssemblyReference.cache
 C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\HeavyClient\obj\Debug\Data\ViewModels\MainMenu.g.cs
 C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\HeavyClient\obj\Debug\MainWindow.g.cs
 C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\HeavyClient\obj\Debug\App.g.cs
@@ -30,3 +29,8 @@ C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\HeavyClient\bin\Debug\Micro
 C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\HeavyClient\bin\Debug\Microsoft.Toolkit.Wpf.UI.XamlHost.xml
 C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\HeavyClient\obj\Debug\HeavyClient.csproj.CopyComplete
 C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\HeavyClient\bin\Debug\Microsoft.Maps.MapControl.WPF.dll
+C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\HeavyClient\bin\Debug\LiveCharts.dll
+C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\HeavyClient\bin\Debug\LiveCharts.pdb
+C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\HeavyClient\bin\Debug\LiveCharts.Wpf.dll
+C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\HeavyClient\bin\Debug\LiveCharts.Wpf.pdb
+C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\HeavyClient\obj\Debug\HeavyClient.csprojAssemblyReference.cache
