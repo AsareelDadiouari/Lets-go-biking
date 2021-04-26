@@ -19,6 +19,7 @@ namespace HeavyClient.Data.ViewModels
         private void Search_Click(object sender, RoutedEventArgs e)
         {
             GeoGeoJson[] geoJsons = service.GetGeoData(departure.Text, arrival.Text);
+            Statistics stats = service.GetStatistics();
 
             if (geoJsons.Length == 0)
             {
@@ -31,9 +32,11 @@ namespace HeavyClient.Data.ViewModels
                 }
             } else
             {
-                Map mapPage = new Map(geoJsons);
+                Map mapPage = new Map(geoJsons, stats);
                 this.NavigationService.Navigate(mapPage);
             }
+
+            //service.Save();
         }
     }
 }

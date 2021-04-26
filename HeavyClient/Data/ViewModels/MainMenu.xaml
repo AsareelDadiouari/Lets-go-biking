@@ -6,7 +6,9 @@
       xmlns:local="clr-namespace:HeavyClient.Data.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Let's Go Biking">
+      Title="Let's Go Biking"
+      
+      >
 
     <Grid x:Name="mainMenu">
         <StackPanel Orientation="Vertical">

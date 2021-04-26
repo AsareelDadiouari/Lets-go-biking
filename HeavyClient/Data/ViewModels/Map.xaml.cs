@@ -15,10 +15,14 @@ namespace HeavyClient.Data.ViewModels
     public partial class Map : Page
     {
         GeoGeoJson[] geoJsons;
-        public Map(GeoGeoJson[] geoJsons)
+        Service1Client service1 = new Service1Client();
+        Statistics statistics;
+        public Map(GeoGeoJson[] geoJsons, Statistics stats)
         {
             InitializeComponent();
             this.geoJsons = geoJsons;
+            this.statistics = stats;
+            
             //Setting default view
             MyMap.SetView(new Location(this.geoJsons[0].features[0].geometry.coordinates[0][1],
             this.geoJsons[0].features[0].geometry.coordinates[0][0]), 15);
@@ -168,7 +172,6 @@ namespace HeavyClient.Data.ViewModels
             DepartAdress.Content = this.geoJsons[0].features[0].properties.segments[0].steps[0].name;
             ArriveAdress.Content = this.geoJsons[this.geoJsons.Length - 1].features[0]
                 .properties.segments[0].steps[lastSize - 1].name;
-
             
             ColumnSeries columnSeries = new ColumnSeries
             {
@@ -176,6 +179,11 @@ namespace HeavyClient.Data.ViewModels
             };
 
             chart.Series.Add(columnSeries);
+        }
+
+        private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            //service1.Save();
         }
     }
 }

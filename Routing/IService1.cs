@@ -1,4 +1,5 @@
 ﻿using Routing.JSONClasses;
+using Routing.Stats;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -12,8 +13,11 @@ namespace Routing
     public interface IService1
     {
         [OperationContract]
-        string getContract();
+        Statistics GetStatistics();
 
+        [OperationContract]
+        bool Save();
+        
         [OperationContract]
         [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "GeoData?start={departure}&end={arrival}")]
         Task<List<Geo.GeoJson>> GetGeoData(string departure, string arrival);

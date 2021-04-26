@@ -84,6 +84,12 @@ namespace WebProxyService.JSONClasses
         public TotalStands totalStands { get; set; }
         public MainStands mainStands { get; set; }
         public OverflowStands overflowStands { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            Station other = (Station)obj;
+            return this.number == other.number && this.name.Equals(other.name) && this.contractName.Equals(other.contractName);
+        }
     }
 
     public class Stations

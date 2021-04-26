@@ -8,6 +8,7 @@
         Title="Let's go Biking" Height="500" Width="800"
         Icon="/Assets/logo_small_icon_only.png"
         ResizeMode="CanResizeWithGrip"
+        Closing="Window_Closing"
         >
     <Grid>
         <DockPanel>

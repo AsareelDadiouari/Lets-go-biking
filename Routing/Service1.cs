@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Routing.JSONClasses;
+using Routing.Stats;
 using System;
 using System.Collections.Generic;
 using System.Data.Services.Client;
@@ -9,7 +10,6 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using WebProxyService.JSONClasses;
-
 namespace Routing
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
@@ -22,6 +22,7 @@ namespace Routing
         static string urlWebProxyStations;
         readonly string apiKey;
         List<GeoCoordinate> StationsGeocoordinates;
+        Statistics statistics;
         System.ServiceModel.Web.WebOperationContext ctx;
 
         public Service1()
@@ -29,6 +30,7 @@ namespace Routing
             urlWebProxyStations = "http://localhost:8733/Design_Time_Addresses/WebProxyService/Service1/rest/Stations";
             apiKey = "5b3ce3597851110001cf6248689d473c044c43afb6cec015efc2fcc1";
             ctx = System.ServiceModel.Web.WebOperationContext.Current;
+            statistics = new Statistics();
 
             using (WebClient webClient = new WebClient())
             {
@@ -45,11 +47,15 @@ namespace Routing
             e.RequestHeaders.Add("Access-Control-Allow-Origin", "*");
         }
 
-        public string getContract()
+        public Statistics GetStatistics()
         {
-            ctx.OutgoingResponse.Headers.Add("Access-Control-Allow-Origin", "*");
-            ctx.OutgoingResponse.Headers.Add("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, HEAD, OPTIONS");
-            return "bro";
+            return statistics ;
+        }
+
+        public bool Save()
+        {
+            statistics.Persist();
+            return true;
         }
 
         public Task<List<Geo.GeoJson>> GetGeoData(string departure, string arrival)
@@ -92,9 +98,7 @@ namespace Routing
 
                 using (WebClient webClient = new WebClient())
                 {
-                    Geo.GeoJson data2 = new Geo.GeoJson(),
-                        data3 = new Geo.GeoJson();
-
+                    Geo.GeoJson data2 = new Geo.GeoJson(), data3 = new Geo.GeoJson();
                     try
                     {
                         string responseData2 = webClient.DownloadString(fromDepartStationToEndStation);
@@ -224,6 +228,7 @@ namespace Routing
                                 closestDepartureStation = null;
                                 closestArrivalStation = null;
                             }
+                            statistics.Set(closestDepartureStation, Statistics.Type.DEPARTURE);
 
                             break;
                         }
@@ -259,6 +264,8 @@ namespace Routing
                                     this.closestArrivalStation = null;
                                     this.closestDepartureStation = null;
                                 }
+                                statistics.Set(this.closestArrivalStation, Statistics.Type.ARRIVAL);
+
                                 break;
                             }
                         }
@@ -295,5 +302,6 @@ namespace Routing
             }
             return true;
         }
+
     }
 }

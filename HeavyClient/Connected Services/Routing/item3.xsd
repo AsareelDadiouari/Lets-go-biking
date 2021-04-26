@@ -1,116 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Routing.JSONClasses" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Routing.JSONClasses" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <xs:import schemaLocation="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/WebProxyService.JSONClasses" />
-  <xs:complexType name="ArrayOfGeo.GeoJson">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Routing.Stats" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Routing.Stats" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/WebProxyService.JSONClasses" />
+  <xs:import schemaLocation="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="Statistics">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Geo.GeoJson" nillable="true" type="tns:Geo.GeoJson" />
+      <xs:element minOccurs="0" name="stationsStats" nillable="true" type="tns:ArrayOfStatistics.StationsStatistics" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfGeo.GeoJson" nillable="true" type="tns:ArrayOfGeo.GeoJson" />
-  <xs:complexType name="Geo.GeoJson">
+  <xs:element name="Statistics" nillable="true" type="tns:Statistics" />
+  <xs:complexType name="ArrayOfStatistics.StationsStatistics">
     <xs:sequence>
-      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="bbox" nillable="true" type="q1:ArrayOfdouble" />
-      <xs:element minOccurs="0" name="features" nillable="true" type="tns:ArrayOfGeo.Feature" />
-      <xs:element minOccurs="0" name="metadata" nillable="true" type="tns:Geo.Metadata" />
-      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/WebProxyService.JSONClasses" minOccurs="0" name="station" nillable="true" type="q2:Station" />
-      <xs:element minOccurs="0" name="type" nillable="true" type="xs:string" />
-      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="waypoints" nillable="true" type="q3:ArrayOfArrayOfdouble" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Statistics.StationsStatistics" type="tns:Statistics.StationsStatistics" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="Geo.GeoJson" nillable="true" type="tns:Geo.GeoJson" />
-  <xs:complexType name="ArrayOfGeo.Feature">
+  <xs:element name="ArrayOfStatistics.StationsStatistics" nillable="true" type="tns:ArrayOfStatistics.StationsStatistics" />
+  <xs:complexType name="Statistics.StationsStatistics">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Geo.Feature" nillable="true" type="tns:Geo.Feature" />
+      <xs:element name="_x003C_occurence_x003E_k__BackingField" type="xs:int" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/WebProxyService.JSONClasses" name="station" nillable="true" type="q1:Station" />
+      <xs:element name="type" type="tns:Statistics.Type" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfGeo.Feature" nillable="true" type="tns:ArrayOfGeo.Feature" />
-  <xs:complexType name="Geo.Feature">
-    <xs:sequence>
-      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="bbox" nillable="true" type="q4:ArrayOfdouble" />
-      <xs:element minOccurs="0" name="geometry" nillable="true" type="tns:Geo.Geometry" />
-      <xs:element minOccurs="0" name="properties" nillable="true" type="tns:Geo.Properties" />
-      <xs:element minOccurs="0" name="type" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Geo.Feature" nillable="true" type="tns:Geo.Feature" />
-  <xs:complexType name="Geo.Geometry">
-    <xs:sequence>
-      <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="coordinates" nillable="true" type="q5:ArrayOfArrayOfdouble" />
-      <xs:element minOccurs="0" name="type" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Geo.Geometry" nillable="true" type="tns:Geo.Geometry" />
-  <xs:complexType name="Geo.Properties">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="segments" nillable="true" type="tns:ArrayOfGeo.Segment" />
-      <xs:element minOccurs="0" name="summary" nillable="true" type="tns:Geo.Summary" />
-      <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="way_points" nillable="true" type="q6:ArrayOfint" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Geo.Properties" nillable="true" type="tns:Geo.Properties" />
-  <xs:complexType name="ArrayOfGeo.Segment">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Geo.Segment" nillable="true" type="tns:Geo.Segment" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfGeo.Segment" nillable="true" type="tns:ArrayOfGeo.Segment" />
-  <xs:complexType name="Geo.Segment">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="distance" type="xs:double" />
-      <xs:element minOccurs="0" name="duration" type="xs:double" />
-      <xs:element minOccurs="0" name="steps" nillable="true" type="tns:ArrayOfGeo.Step" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Geo.Segment" nillable="true" type="tns:Geo.Segment" />
-  <xs:complexType name="ArrayOfGeo.Step">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Geo.Step" nillable="true" type="tns:Geo.Step" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfGeo.Step" nillable="true" type="tns:ArrayOfGeo.Step" />
-  <xs:complexType name="Geo.Step">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="distance" type="xs:double" />
-      <xs:element minOccurs="0" name="duration" type="xs:double" />
-      <xs:element minOccurs="0" name="instruction" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="type" type="xs:int" />
-      <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="way_points" nillable="true" type="q7:ArrayOfint" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Geo.Step" nillable="true" type="tns:Geo.Step" />
-  <xs:complexType name="Geo.Summary">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="distance" type="xs:double" />
-      <xs:element minOccurs="0" name="duration" type="xs:double" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Geo.Summary" nillable="true" type="tns:Geo.Summary" />
-  <xs:complexType name="Geo.Metadata">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="attribution" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="engine" nillable="true" type="tns:Geo.Engine" />
-      <xs:element minOccurs="0" name="query" nillable="true" type="tns:Geo.Query" />
-      <xs:element minOccurs="0" name="service" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="timestamp" type="xs:long" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Geo.Metadata" nillable="true" type="tns:Geo.Metadata" />
-  <xs:complexType name="Geo.Engine">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="build_date" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="graph_date" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="version" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Geo.Engine" nillable="true" type="tns:Geo.Engine" />
-  <xs:complexType name="Geo.Query">
-    <xs:sequence>
-      <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="coordinates" nillable="true" type="q8:ArrayOfArrayOfdouble" />
-      <xs:element minOccurs="0" name="format" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="profile" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Geo.Query" nillable="true" type="tns:Geo.Query" />
+  <xs:element name="Statistics.StationsStatistics" nillable="true" type="tns:Statistics.StationsStatistics" />
+  <xs:simpleType name="Statistics.Type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DEFAULT" />
+      <xs:enumeration value="DEPARTURE" />
+      <xs:enumeration value="ARRIVAL" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Statistics.Type" nillable="true" type="tns:Statistics.Type" />
 </xs:schema>

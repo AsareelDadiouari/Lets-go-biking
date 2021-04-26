@@ -27,6 +27,7 @@
     <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="fd28edf3-ae6e-42ab-8793-4a9649a3bd0f" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?xsd=xsd0" />
     <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="450a5592-52c0-435d-b225-ccdeb66eb27c" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?xsd=xsd3" />
     <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="a21d1820-76bf-4cc6-9973-0bdd3f319b84" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?xsd=xsd2" />
+    <MetadataFile FileName="item5.xsd" MetadataType="Schema" ID="4779e333-29e7-441d-bbeb-7845c624802c" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?xsd=xsd5" />
     <MetadataFile FileName="item4.xsd" MetadataType="Schema" ID="a5f03c0d-bcab-45c6-8530-71a7f2aa7109" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?xsd=xsd4" />
     <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="a03610fe-51a4-4d66-b26a-7f2953776f4b" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/Routing/Service1/?wsdl" />
   </Metadata>

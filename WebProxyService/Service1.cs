@@ -70,7 +70,6 @@ namespace WebProxyService
                     string data = webClient.DownloadString(url);
                     List<Station> myDeserializedClass = JsonConvert.DeserializeObject<List<Station>>(data);
                     return Task.FromResult(myDeserializedClass);
-
                 }
                 catch (Exception e)
                 {

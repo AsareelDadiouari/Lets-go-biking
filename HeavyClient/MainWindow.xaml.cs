@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using HeavyClient.Routing;
+using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
@@ -9,10 +11,12 @@ namespace HeavyClient
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+        Service1Client service1 = new Service1Client();
+
         public MainWindow()
         {
             InitializeComponent();
+
             MenuItem logs = new MenuItem()
             {
                 Header = "Logs",
@@ -45,8 +49,14 @@ namespace HeavyClient
             mainMenu.NavigationUIVisibility = NavigationUIVisibility.Automatic;
         }
 
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            service1.Save();
+        }
+
         private void On_Quit_Click(object sender, RoutedEventArgs e)
         {
+            service1.Save();
             Application.Current.Shutdown();
         }
     }
