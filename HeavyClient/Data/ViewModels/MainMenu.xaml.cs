@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using HeavyClient.Routing;
+using Routing;
 
 namespace HeavyClient.Data.ViewModels
 {
@@ -16,10 +16,10 @@ namespace HeavyClient.Data.ViewModels
             InitializeComponent();
         }
 
-        private void Search_Click(object sender, RoutedEventArgs e)
+        private async void Search_Click(object sender, RoutedEventArgs e)
         {
-            GeoGeoJson[] geoJsons = service.GetGeoData(departure.Text, arrival.Text);
-            Statistics stats = service.GetStatistics();
+            GeoGeoJson[] geoJsons = await service.GetGeoDataAsync(departure.Text, arrival.Text);
+            Statistics stats = await service.GetStatisticsAsync();
 
             if (geoJsons.Length == 0)
             {
@@ -30,7 +30,8 @@ namespace HeavyClient.Data.ViewModels
                 {
                     this.Focus();
                 }
-            } else
+            }
+            else
             {
                 Map mapPage = new Map(geoJsons, stats);
                 this.NavigationService.Navigate(mapPage);

@@ -1,9 +1,8 @@
-﻿using HeavyClient.Routing;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-
+using Routing;
 namespace HeavyClient
 {
     /// <summary>
@@ -51,12 +50,12 @@ namespace HeavyClient
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            service1.Save();
+            service1.SaveAsync();
         }
 
         private void On_Quit_Click(object sender, RoutedEventArgs e)
         {
-            service1.Save();
+            service1.SaveAsync();
             Application.Current.Shutdown();
         }
     }

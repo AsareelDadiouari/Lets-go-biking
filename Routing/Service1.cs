@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Routing.JSONClasses;
-using Routing.Stats;
 using System;
 using System.Collections.Generic;
 using System.Data.Services.Client;
@@ -22,7 +21,6 @@ namespace Routing
         static string urlWebProxyStations;
         readonly string apiKey;
         List<GeoCoordinate> StationsGeocoordinates;
-        Statistics statistics;
         System.ServiceModel.Web.WebOperationContext ctx;
 
         public Service1()
@@ -30,7 +28,6 @@ namespace Routing
             urlWebProxyStations = "http://localhost:8733/Design_Time_Addresses/WebProxyService/Service1/rest/Stations";
             apiKey = "5b3ce3597851110001cf6248689d473c044c43afb6cec015efc2fcc1";
             ctx = System.ServiceModel.Web.WebOperationContext.Current;
-            statistics = new Statistics();
 
             using (WebClient webClient = new WebClient())
             {
@@ -45,17 +42,6 @@ namespace Routing
         private static void OnSendingRequest(object sender, SendingRequestEventArgs e)
         {
             e.RequestHeaders.Add("Access-Control-Allow-Origin", "*");
-        }
-
-        public Statistics GetStatistics()
-        {
-            return statistics ;
-        }
-
-        public bool Save()
-        {
-            statistics.Persist();
-            return true;
         }
 
         public Task<List<Geo.GeoJson>> GetGeoData(string departure, string arrival)
@@ -228,7 +214,6 @@ namespace Routing
                                 closestDepartureStation = null;
                                 closestArrivalStation = null;
                             }
-                            statistics.Set(closestDepartureStation, Statistics.Type.DEPARTURE);
 
                             break;
                         }
@@ -264,7 +249,6 @@ namespace Routing
                                     this.closestArrivalStation = null;
                                     this.closestDepartureStation = null;
                                 }
-                                statistics.Set(this.closestArrivalStation, Statistics.Type.ARRIVAL);
 
                                 break;
                             }

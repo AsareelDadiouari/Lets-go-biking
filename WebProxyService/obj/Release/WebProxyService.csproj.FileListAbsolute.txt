@@ -10,3 +10,15 @@ C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\WebProxyService\obj\Release
 C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\WebProxyService\obj\Release\WebProxyService.csproj.CopyComplete
 C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\WebProxyService\obj\Release\WebProxyService.dll
 C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\WebProxyService\obj\Release\WebProxyService.pdb
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\bin\Release\WebProxyService.dll.config
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\bin\Release\WebProxyService.dll
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\bin\Release\WebProxyService.pdb
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\bin\Release\Newtonsoft.Json.dll
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\bin\Release\RestSharp.dll
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\bin\Release\Newtonsoft.Json.xml
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\bin\Release\RestSharp.xml
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\obj\Release\WebProxyService.csproj.CoreCompileInputs.cache
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\obj\Release\WebProxyService.csproj.CopyComplete
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\obj\Release\WebProxyService.dll
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\obj\Release\WebProxyService.pdb
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\obj\Release\WebProxyService.csprojAssemblyReference.cache

@@ -10,3 +10,15 @@ C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\WebProxyService\obj\Debug\W
 C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\WebProxyService\obj\Debug\WebProxyService.csprojAssemblyReference.cache
 C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\WebProxyService\bin\Debug\RestSharp.dll
 C:\Users\dyiem\OneDrive\Bureau\ProjetWS\LetsGoBiking\WebProxyService\bin\Debug\RestSharp.xml
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\bin\Debug\WebProxyService.dll.config
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\bin\Debug\WebProxyService.dll
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\bin\Debug\WebProxyService.pdb
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\bin\Debug\Newtonsoft.Json.dll
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\bin\Debug\RestSharp.dll
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\bin\Debug\Newtonsoft.Json.xml
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\bin\Debug\RestSharp.xml
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\obj\Debug\WebProxyService.csprojAssemblyReference.cache
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\obj\Debug\WebProxyService.csproj.CoreCompileInputs.cache
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\obj\Debug\WebProxyService.csproj.CopyComplete
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\obj\Debug\WebProxyService.dll
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\obj\Debug\WebProxyService.pdb

@@ -1,11 +1,11 @@
-﻿using HeavyClient.Routing;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Microsoft.Maps.MapControl.WPF;
 using LiveCharts;
 using LiveCharts.Wpf;
+using Routing;
 
 namespace HeavyClient.Data.ViewModels
 {
@@ -22,7 +22,7 @@ namespace HeavyClient.Data.ViewModels
             InitializeComponent();
             this.geoJsons = geoJsons;
             this.statistics = stats;
-            
+
             //Setting default view
             MyMap.SetView(new Location(this.geoJsons[0].features[0].geometry.coordinates[0][1],
             this.geoJsons[0].features[0].geometry.coordinates[0][0]), 15);
@@ -35,7 +35,7 @@ namespace HeavyClient.Data.ViewModels
         {
             LocationCollection locs = new LocationCollection();
             List<MapPolyline> mapPolylines = new List<MapPolyline>();
-            List<Pushpin> pins = new List<Pushpin>();  
+            List<Pushpin> pins = new List<Pushpin>();
 
             foreach (var data in this.geoJsons.Select((value, index) => new { value, index }))
             {
@@ -51,8 +51,8 @@ namespace HeavyClient.Data.ViewModels
                                 StrokeThickness = 4
                             };
                             routeLine.Locations = new LocationCollection();
-                            
-                            foreach(var loc in feature.value.geometry.coordinates)
+
+                            foreach (var loc in feature.value.geometry.coordinates)
                             {
                                 routeLine.Locations.Add(new Location(loc[1], loc[0]));
                             }
@@ -140,7 +140,7 @@ namespace HeavyClient.Data.ViewModels
                 Location = locs[locs.Count - 1],
                 ToolTip = "Arrival"
             };
-            
+
             MyMap.Children.Add(pinFinal);
         }
 
@@ -165,14 +165,14 @@ namespace HeavyClient.Data.ViewModels
                 }
             }
 
-            Distance.Content = (dist/1000).ToString() + "km";
-            Duration.Content = (dur/3600) + "h";
+            Distance.Content = (dist / 1000).ToString() + "km";
+            Duration.Content = (dur / 3600) + "h";
 
             int lastSize = this.geoJsons[this.geoJsons.Length - 1].features[0].properties.segments[0].steps.Length - 1;
             DepartAdress.Content = this.geoJsons[0].features[0].properties.segments[0].steps[0].name;
             ArriveAdress.Content = this.geoJsons[this.geoJsons.Length - 1].features[0]
                 .properties.segments[0].steps[lastSize - 1].name;
-            
+
             ColumnSeries columnSeries = new ColumnSeries
             {
                 Values = new ChartValues<double> { 10 },

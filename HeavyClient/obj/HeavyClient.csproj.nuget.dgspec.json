@@ -1,19 +1,18 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dyiem\\OneDrive\\Bureau\\ProjetWS\\LetsGoBiking\\HeavyClient\\HeavyClient.csproj": {}
+    "C:\\Users\\dyiem\\OneDrive\\Bureau\\Lets-go-biking\\HeavyClient\\HeavyClient.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dyiem\\OneDrive\\Bureau\\ProjetWS\\LetsGoBiking\\HeavyClient\\HeavyClient.csproj": {
+    "C:\\Users\\dyiem\\OneDrive\\Bureau\\Lets-go-biking\\HeavyClient\\HeavyClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dyiem\\OneDrive\\Bureau\\ProjetWS\\LetsGoBiking\\HeavyClient\\HeavyClient.csproj",
+        "projectUniqueName": "C:\\Users\\dyiem\\OneDrive\\Bureau\\Lets-go-biking\\HeavyClient\\HeavyClient.csproj",
         "projectName": "HeavyClient",
-        "projectPath": "C:\\Users\\dyiem\\OneDrive\\Bureau\\ProjetWS\\LetsGoBiking\\HeavyClient\\HeavyClient.csproj",
+        "projectPath": "C:\\Users\\dyiem\\OneDrive\\Bureau\\Lets-go-biking\\HeavyClient\\HeavyClient.csproj",
         "packagesPath": "C:\\Users\\dyiem\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dyiem\\OneDrive\\Bureau\\ProjetWS\\LetsGoBiking\\HeavyClient\\obj\\",
+        "outputPath": "C:\\Users\\dyiem\\OneDrive\\Bureau\\Lets-go-biking\\HeavyClient\\obj\\",
         "projectStyle": "PackageReference",
-        "skipContentFileWrite": true,
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
@@ -25,20 +24,27 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net472"
+          "netcoreapp3.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net472": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
         }
       },
       "frameworks": {
-        "net472": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "LiveCharts.Wpf": {
               "target": "Package",
@@ -48,27 +54,42 @@
               "target": "Package",
               "version": "[1.0.0.3, )"
             },
-            "Microsoft.VCRTForwarders.140": {
+            "System.ServiceModel.Duplex": {
               "target": "Package",
-              "version": "[1.0.6, )"
+              "version": "[4.4.*, )"
+            },
+            "System.ServiceModel.Http": {
+              "target": "Package",
+              "version": "[4.4.*, )"
+            },
+            "System.ServiceModel.NetTcp": {
+              "target": "Package",
+              "version": "[4.4.*, )"
+            },
+            "System.ServiceModel.Security": {
+              "target": "Package",
+              "version": "[4.4.*, )"
             }
           },
           "imports": [
-            "uap10.0.19041"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true
-        }
-      },
-      "runtimes": {
-        "win": {
-          "#import": []
-        },
-        "win-x64": {
-          "#import": []
-        },
-        "win-x86": {
-          "#import": []
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }

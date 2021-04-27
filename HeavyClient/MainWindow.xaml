@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HeavyClient"
         mc:Ignorable="d"
         Title="Let's go Biking" Height="500" Width="800"
-        Icon="/Assets/logo_small_icon_only.png"
+        Icon="Assets/logo_small_icon_only.png"
         ResizeMode="CanResizeWithGrip"
         Closing="Window_Closing"
         >
