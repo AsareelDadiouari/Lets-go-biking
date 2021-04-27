@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
@@ -37,7 +36,7 @@ namespace LightClient
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/build";
-            }); 
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,17 +61,17 @@ namespace LightClient
             app.UseSpaStaticFiles();
             //app.UseAuthorization();
 
-           /* app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "ClientApp";
+            /* app.UseSpa(spa =>
+             {
+                 spa.Options.SourcePath = "ClientApp";
 
-                if (env.IsDevelopment())
-                {
-                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
-                    spa.UseReactDevelopmentServer("http://localhost:3000");
-                    //spa.UseReactDevelopmentServer(npmScript: "start");
-                }
-            });*/
+                 if (env.IsDevelopment())
+                 {
+                     //spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
+                     spa.UseReactDevelopmentServer("http://localhost:3000");
+                     //spa.UseReactDevelopmentServer(npmScript: "start");
+                 }
+             });*/
 
 
 

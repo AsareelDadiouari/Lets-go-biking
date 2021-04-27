@@ -11,7 +11,8 @@ namespace WebProxyService
         ObjectCache cache;
         string apiKey = "86be9cea843de8454702fe1727d19b4d8716012a";
 
-        public ProxyCache() {
+        public ProxyCache()
+        {
             cache = MemoryCache.Default;
         }
 
@@ -44,7 +45,7 @@ namespace WebProxyService
                         Priority = CacheItemPriority.Default
                     };
                     cache.Set(stationId, station, cacheItemPolicy);
-                } 
+                }
             }
             return (T)cache[stationId];
         }

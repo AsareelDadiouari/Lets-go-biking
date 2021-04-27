@@ -64,7 +64,7 @@ namespace Routing
 
             Coord clientStart = new Coord(dep);
             Coord clientEnd = new Coord(arr);
-            
+
             findClosestStations(new GeoCoordinate(double.Parse(clientStart.latitude, CultureInfo.InvariantCulture), double.Parse(clientStart.longitude, CultureInfo.InvariantCulture)),
                 new GeoCoordinate(double.Parse(clientEnd.latitude, CultureInfo.InvariantCulture), double.Parse(clientEnd.longitude, CultureInfo.InvariantCulture)));
 
@@ -72,7 +72,7 @@ namespace Routing
             {
                 string fromStartClientToDepartStation = "https://api.openrouteservice.org/v2/directions/foot-walking?api_key=" + apiKey +
                 "&start=" + clientStart.longitude + "," + clientStart.latitude + "&end=" +
-                this.closestDepartureStation.position.longitude.ToString().Replace(",",".") + "," + this.closestDepartureStation.position.latitude.ToString().Replace(",", ".");
+                this.closestDepartureStation.position.longitude.ToString().Replace(",", ".") + "," + this.closestDepartureStation.position.latitude.ToString().Replace(",", ".");
 
                 string fromDepartStationToEndStation = "https://api.openrouteservice.org/v2/directions/cycling-road?api_key=" + apiKey +
                  "&start=" + this.closestDepartureStation.position.longitude.ToString().Replace(",", ".") + "," + this.closestDepartureStation.position.latitude.ToString().Replace(",", ".")
@@ -132,13 +132,14 @@ namespace Routing
                         return Task.FromResult(new List<Geo.GeoJson>());
                     }
                 }
-            } else
+            }
+            else
             {
                 string fromStartClientToEndClient = "https://api.openrouteservice.org/v2/directions/driving-car?api_key=" + apiKey +
                 "&start=" + clientStart.longitude + "," + clientStart.latitude + "&end=" +
                 clientEnd.longitude + "," + clientEnd.latitude;
 
-                using(WebClient webClient = new WebClient())
+                using (WebClient webClient = new WebClient())
                 {
                     ctx.OutgoingResponse.Headers.Add("Access-Control-Allow-Origin", "*");
                     ctx.OutgoingResponse.Headers.Add("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, HEAD, OPTIONS");
@@ -148,7 +149,6 @@ namespace Routing
                         string responseData = webClient.DownloadString(fromStartClientToEndClient);
                         Geo.GeoJson data = JsonConvert.DeserializeObject<Geo.GeoJson>(responseData);
                         data.waypoints = data.features[0].geometry.coordinates;
-
                         geoJsons.Add(data);
                         return Task.FromResult(geoJsons);
                     }
@@ -205,7 +205,7 @@ namespace Routing
                         tempDep.contractName + "&id=" + tempDep.number;
                         string response = webClient.DownloadString(url);
                         Station sta = JsonConvert.DeserializeObject<Station>(response);
-                        if (sta.status == "OPEN" && sta.mainStands.availabilities.bikes >=1)
+                        if (sta.status == "OPEN" && sta.mainStands.availabilities.bikes >= 1)
                         {
                             this.closestDepartureStation = sta;
 
@@ -260,14 +260,14 @@ namespace Routing
                     }
                     indice++;
                 }
-            }   
+            }
         }
 
         private List<GeoCoordinate> convertStationsToGeo(List<Station> stations)
         {
             List<GeoCoordinate> geos = new List<GeoCoordinate>();
 
-            foreach(var station in stations)
+            foreach (var station in stations)
             {
                 geos.Add(new GeoCoordinate(station.position.latitude, station.position.longitude));
             }

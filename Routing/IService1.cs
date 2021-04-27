@@ -1,7 +1,5 @@
 ﻿using Routing.JSONClasses;
-using Routing.Stats;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Threading.Tasks;

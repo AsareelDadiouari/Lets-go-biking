@@ -93,5 +93,5 @@ namespace Routing.JSONClasses
             public List<List<double>> waypoints;
         }
     }
-    
+
 }

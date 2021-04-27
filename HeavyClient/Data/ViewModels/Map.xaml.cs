@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Controls;
-using System.Windows.Media;
-using Microsoft.Maps.MapControl.WPF;
+﻿using Google.Cloud.Firestore;
+using HeavyClient.Config;
 using LiveCharts;
 using LiveCharts.Wpf;
+using Microsoft.Maps.MapControl.WPF;
 using Routing;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace HeavyClient.Data.ViewModels
 {
@@ -16,12 +20,14 @@ namespace HeavyClient.Data.ViewModels
     {
         GeoGeoJson[] geoJsons;
         Service1Client service1 = new Service1Client();
-        Statistics statistics;
-        public Map(GeoGeoJson[] geoJsons, Statistics stats)
+        FirestoreDb database;
+        readonly private string configURL = AppDomain.CurrentDomain.BaseDirectory + "\\config.json";
+        public Map(GeoGeoJson[] geoJsons)
         {
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", configURL);
+            database = FirestoreDb.Create("let-s-go-biking");
             InitializeComponent();
             this.geoJsons = geoJsons;
-            this.statistics = stats;
 
             //Setting default view
             MyMap.SetView(new Location(this.geoJsons[0].features[0].geometry.coordinates[0][1],
@@ -144,7 +150,7 @@ namespace HeavyClient.Data.ViewModels
             MyMap.Children.Add(pinFinal);
         }
 
-        private void DetailsSetup()
+        private async void DetailsSetup()
         {
             double dur = 0, dist = 0;
             //Set Steps
@@ -173,6 +179,9 @@ namespace HeavyClient.Data.ViewModels
             ArriveAdress.Content = this.geoJsons[this.geoJsons.Length - 1].features[0]
                 .properties.segments[0].steps[lastSize - 1].name;
 
+            mostVDeparture.Content = await GetMostUsedDepStation();
+            mostVArrival.Content = await GetMostUsedArrStation();
+
             ColumnSeries columnSeries = new ColumnSeries
             {
                 Values = new ChartValues<double> { 10 },
@@ -181,9 +190,50 @@ namespace HeavyClient.Data.ViewModels
             chart.Series.Add(columnSeries);
         }
 
-        private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        private async Task<string> GetMostUsedDepStation()
         {
-            //service1.Save();
+            CollectionReference stationsDeparture = database.Collection("StationsDeparture");
+            QuerySnapshot snapshot = await stationsDeparture.GetSnapshotAsync();
+
+            int max = 0;
+            string id = "";
+            foreach (var doc in snapshot)
+            {
+                StationStatistics current = doc.ConvertTo<StationStatistics>();
+                if (current.occurence > max)
+                {
+                    max = current.occurence;
+                    id = current.station.number.ToString();
+                }
+            }
+
+            DocumentSnapshot foundSnapchot = await stationsDeparture.Document(id).GetSnapshotAsync();
+            StationStatistics found = foundSnapchot.ConvertTo<StationStatistics>();
+
+            return found.occurence + "x -->" + found.station.name + "," + found.station.contractName;
+        }
+
+        private async Task<string> GetMostUsedArrStation()
+        {
+            CollectionReference stationsArrival = database.Collection("StationsArrival");
+            QuerySnapshot snapshot = await stationsArrival.GetSnapshotAsync();
+
+            int max = 0;
+            string id = "";
+            foreach (var doc in snapshot)
+            {
+                StationStatistics current = doc.ConvertTo<StationStatistics>();
+                if (current.occurence > max)
+                {
+                    max = current.occurence;
+                    id = current.station.number.ToString();
+                }
+            }
+
+            DocumentSnapshot foundSnapchot = await stationsArrival.Document(id).GetSnapshotAsync();
+            StationStatistics found = foundSnapchot.ConvertTo<StationStatistics>();
+
+            return found.occurence + "x -->" + found.station.name + "," + found.station.contractName;
         }
     }
 }

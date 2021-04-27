@@ -1,6 +1,10 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using Google.Cloud.Firestore;
+using HeavyClient.Config;
 using Routing;
+using System;
+using System.Windows;
+using System.Windows.Controls;
+using static HeavyClient.Config.StationStatistics;
 
 namespace HeavyClient.Data.ViewModels
 {
@@ -10,16 +14,21 @@ namespace HeavyClient.Data.ViewModels
     public partial class MainMenu : Page
     {
         private Service1Client service;
+        FirestoreDb database;
+        readonly private string configURL = AppDomain.CurrentDomain.BaseDirectory + "\\config.json";
         public MainMenu()
         {
             service = new Service1Client();
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", configURL);
+            database = FirestoreDb.Create("let-s-go-biking");
             InitializeComponent();
         }
 
         private async void Search_Click(object sender, RoutedEventArgs e)
         {
             GeoGeoJson[] geoJsons = await service.GetGeoDataAsync(departure.Text, arrival.Text);
-            Statistics stats = await service.GetStatisticsAsync();
+            AddStation(geoJsons[0].station, StationStatistics.TypeStation.DEPARTURE);
+            AddStation(geoJsons[geoJsons.Length - 1].station, StationStatistics.TypeStation.ARRIVAL);
 
             if (geoJsons.Length == 0)
             {
@@ -33,11 +42,48 @@ namespace HeavyClient.Data.ViewModels
             }
             else
             {
-                Map mapPage = new Map(geoJsons, stats);
+                Map mapPage = new Map(geoJsons);
                 this.NavigationService.Navigate(mapPage);
             }
+        }
 
-            //service.Save();
+        private async void AddStation(Routing.Station sta, StationStatistics.TypeStation typeStation)
+        {
+            CollectionReference stations = database.Collection("Stations");
+
+            if (typeStation.Equals(TypeStation.DEPARTURE))
+            {
+                stations = database.Collection("StationsDeparture");
+            }
+            else if (typeStation.Equals(TypeStation.ARRIVAL))
+            {
+                stations = database.Collection("StationsArrival");
+            }
+
+            if (sta != null)
+            {
+                try
+                {
+                    DocumentReference stationRef = stations.Document(sta.number.ToString());
+                    await stationRef.UpdateAsync("occurence", FieldValue.Increment(1));
+                }
+                catch (Exception e)
+                {
+                    StationStatistics stationStatistics = new StationStatistics()
+                    {
+                        type = typeStation,
+                        station = new Config.Station()
+                        {
+                            address = sta.address,
+                            contractName = sta.contractName,
+                            name = sta.name,
+                            number = sta.number
+                        },
+                        occurence = 0
+                    };
+                    await stations.Document(sta.number.ToString()).SetAsync(stationStatistics);
+                }
+            }
         }
     }
 }

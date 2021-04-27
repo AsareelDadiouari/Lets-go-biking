@@ -24,7 +24,7 @@ namespace WebProxyService
         {
             ctx.OutgoingResponse.Headers.Add("Access-Control-Allow-Origin", "*");
             ctx.OutgoingResponse.Headers.Add("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, HEAD, OPTIONS");
-            string url = "https://api.jcdecaux.com/vls/v3/stations?contract="+ contractName + "&apiKey=" + apiKey;
+            string url = "https://api.jcdecaux.com/vls/v3/stations?contract=" + contractName + "&apiKey=" + apiKey;
 
             using (WebClient webClient = new WebClient())
             {
@@ -47,7 +47,7 @@ namespace WebProxyService
                 {
                     return Task.FromResult(new List<Station>());
                 }
-            } 
+            }
         }
 
         public Task<Station> GetOneStation(string contractName, int stationId)
@@ -63,7 +63,7 @@ namespace WebProxyService
             ctx.OutgoingResponse.Headers.Add("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, HEAD, OPTIONS");
             string url = "https://api.jcdecaux.com/vls/v3/stations?apiKey=" + apiKey;
 
-            using(WebClient webClient = new WebClient())
+            using (WebClient webClient = new WebClient())
             {
                 try
                 {
