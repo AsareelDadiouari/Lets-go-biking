@@ -182,12 +182,20 @@ namespace HeavyClient.Data.ViewModels
             mostVDeparture.Content = await GetMostUsedDepStation();
             mostVArrival.Content = await GetMostUsedArrStation();
 
-            ColumnSeries columnSeries = new ColumnSeries
-            {
-                Values = new ChartValues<double> { 10 },
-            };
+            var stations = await GetFiveMostUsed();
 
-            chart.Series.Add(columnSeries);
+            SeriesCollection seriesCollection = new SeriesCollection();
+
+            foreach(var station in stations)
+            {
+                seriesCollection.Add(new ColumnSeries
+                {
+                    Title = station.Key,
+                    Values = new ChartValues<int> { station.Value },
+                    Fill = Brushes.Blue,
+                });
+            }
+            chart.Series.AddRange(seriesCollection);
         }
 
         private async Task<string> GetMostUsedDepStation()
@@ -234,6 +242,27 @@ namespace HeavyClient.Data.ViewModels
             StationStatistics found = foundSnapchot.ConvertTo<StationStatistics>();
 
             return found.occurence + "x -->" + found.station.name + "," + found.station.contractName;
+        }
+
+        private async Task<Dictionary<string, int>> GetFiveMostUsed()
+        {
+            Dictionary<string, int> pairs = new Dictionary<string, int>();
+
+            CollectionReference stationsDeparture = database.Collection("StationsDeparture");
+            QuerySnapshot snapshotDeparture = await stationsDeparture.GetSnapshotAsync();
+
+            CollectionReference stationsArrival = database.Collection("StationsArrival");
+            QuerySnapshot snapshotArrival = await stationsArrival.GetSnapshotAsync();
+
+            var documents = snapshotDeparture.Documents.ToList().Union(snapshotArrival.Documents.ToList()).OrderByDescending(x => x.ConvertTo<StationStatistics>().occurence);
+
+            foreach (var doc in documents.Take(5))
+            {
+                StationStatistics currentStation = doc.ConvertTo<StationStatistics>();
+                pairs.Add(currentStation.station.name + "\n[" + currentStation.station.contractName + "]" , currentStation.occurence);
+            }
+
+            return pairs;
         }
     }
 }
