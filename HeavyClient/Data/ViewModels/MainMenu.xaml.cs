@@ -29,8 +29,9 @@ namespace HeavyClient.Data.ViewModels
 
         private async void Search_Click(object sender, RoutedEventArgs e)
         {
-            //MainWindow.nbOfSearches++;
+            Search.IsEnabled = false;
             var geoJsons = await service.GetGeoDataAsync(departure.Text, arrival.Text);
+            Search.IsEnabled = true;
             AddStation(geoJsons[0].station, TypeStation.DEPARTURE);
             AddStation(geoJsons[geoJsons.Length - 1].station, TypeStation.ARRIVAL);
 

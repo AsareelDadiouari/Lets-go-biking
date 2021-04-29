@@ -105,7 +105,10 @@ namespace HeavyClient
                 WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
                 worksheetPart.Worksheet = new Worksheet(new SheetData());
 
-                for(char letter = 'A'; letter <= 'E'; letter++ )
+                WorksheetPart worksheetPart2 = workbookPart.AddNewPart<WorksheetPart>();
+                worksheetPart2.Worksheet = new Worksheet(new SheetData());
+
+                for (char letter = 'A'; letter <= 'E'; letter++ )
                 {
                     if (letter == 'A')
                         InsertDataAtCell("Departure", letter.ToString(), 1, worksheetPart, spreadSheet);
@@ -143,22 +146,22 @@ namespace HeavyClient
                     }
                 }
 
-                MainWindow.lineCounter += 2;
+                MainWindow.lineCounter = 1;
 
                 for (char letter = 'A'; letter <= 'F'; letter++)
                 {
                     if (letter == 'A')
-                        InsertDataAtCell("Number", letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                        InsertDataAtCell("Number", letter.ToString(), MainWindow.lineCounter, worksheetPart2, spreadSheet);
                     else if (letter == 'B')
-                        InsertDataAtCell("Name", letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                        InsertDataAtCell("Name", letter.ToString(), MainWindow.lineCounter, worksheetPart2, spreadSheet);
                     else if (letter == 'C')
-                        InsertDataAtCell("Contract", letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                        InsertDataAtCell("Contract", letter.ToString(), MainWindow.lineCounter, worksheetPart2, spreadSheet);
                     else if (letter == 'D')
-                        InsertDataAtCell("Adress", letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                        InsertDataAtCell("Adress", letter.ToString(), MainWindow.lineCounter, worksheetPart2, spreadSheet);
                     else if (letter == 'E')
-                        InsertDataAtCell("Occurence", letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                        InsertDataAtCell("Occurence", letter.ToString(), MainWindow.lineCounter, worksheetPart2, spreadSheet);
                     else if (letter == 'F')
-                        InsertDataAtCell("Type", letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                        InsertDataAtCell("Type", letter.ToString(), MainWindow.lineCounter, worksheetPart2, spreadSheet);
                 }
 
                 for (int i = 0; i < stationStatistics.Count; i++)
@@ -168,36 +171,42 @@ namespace HeavyClient
                     for (char letter = 'A'; letter <= 'F'; letter++)
                     {
                         if (letter == 'A')
-                            InsertDataAtCell(stationStatistics[i].station.number.ToString(), letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                            InsertDataAtCell(stationStatistics[i].station.number.ToString(), letter.ToString(), MainWindow.lineCounter, worksheetPart2, spreadSheet);
                         else if (letter == 'B')
-                            InsertDataAtCell(stationStatistics[i].station.name, letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                            InsertDataAtCell(stationStatistics[i].station.name, letter.ToString(), MainWindow.lineCounter, worksheetPart2, spreadSheet);
                         else if (letter == 'C')
-                            InsertDataAtCell(stationStatistics[i].station.contractName, letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                            InsertDataAtCell(stationStatistics[i].station.contractName, letter.ToString(), MainWindow.lineCounter, worksheetPart2, spreadSheet);
                         else if (letter == 'D')
-                            InsertDataAtCell(stationStatistics[i].station.address, letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                            InsertDataAtCell(stationStatistics[i].station.address, letter.ToString(), MainWindow.lineCounter, worksheetPart2, spreadSheet);
                         else if (letter == 'E')
-                            InsertDataAtCell(stationStatistics[i].occurence.ToString(), letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                            InsertDataAtCell(stationStatistics[i].occurence.ToString(), letter.ToString(), MainWindow.lineCounter, worksheetPart2, spreadSheet);
                         else if (letter == 'F')
-                            InsertDataAtCell(stationStatistics[i].type.ToString(), letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                            InsertDataAtCell(stationStatistics[i].type.ToString(), letter.ToString(), MainWindow.lineCounter, worksheetPart2, spreadSheet);
                     }
                 }
-
 
                 Sheets sheets = spreadSheet.WorkbookPart.Workbook.AppendChild<Sheets>(new Sheets());
                 Sheet sheet = new Sheet()
                 {
                     Id = spreadSheet.WorkbookPart.GetIdOfPart(worksheetPart),
                     SheetId = 1,
-                    Name = "Stats"
+                    Name = "Searches"
+                };
+
+                Sheet sheet2 = new Sheet()
+                {
+                    Id = spreadSheet.WorkbookPart.GetIdOfPart(worksheetPart2),
+                    SheetId = 2,
+                    Name = "Most Visited Stations"
                 };
                 sheets.Append(sheet);
+                sheets.Append(sheet2);
             }
 
         }
 
         private void InsertDataAtCell(string data, string column, uint row, WorksheetPart worksheetPart, SpreadsheetDocument spreadSheet)
         {
-
             // Get the SharedStringTablePart. If it does not exist, create a new one.
             SharedStringTablePart shareStringPart;
             if (spreadSheet.WorkbookPart.GetPartsOfType<SharedStringTablePart>().Count() > 0)
