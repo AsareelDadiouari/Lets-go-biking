@@ -79,19 +79,17 @@ namespace Routing.JSONClasses
         [DataContract]
         public class GeoJson
         {
-            [DataMember]
-            public string type { get; set; }
-            [DataMember]
-            public List<Feature> features { get; set; }
-            [DataMember]
-            public List<double> bbox { get; set; }
-            [DataMember]
-            public Metadata metadata { get; set; }
-            [DataMember]
-            public Station station { get; set; }
-            [DataMember]
-            public List<List<double>> waypoints;
+            [DataMember] public List<List<double>> waypoints;
+
+            [DataMember] public string type { get; set; }
+
+            [DataMember] public List<Feature> features { get; set; }
+
+            [DataMember] public List<double> bbox { get; set; }
+
+            [DataMember] public Metadata metadata { get; set; }
+
+            [DataMember] public Station station { get; set; }
         }
     }
-
 }

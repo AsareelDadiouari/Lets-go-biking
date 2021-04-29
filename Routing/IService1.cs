@@ -11,7 +11,8 @@ namespace Routing
     public interface IService1
     {
         [OperationContract]
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "GeoData?start={departure}&end={arrival}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "GeoData?start={departure}&end={arrival}")]
         Task<List<Geo.GeoJson>> GetGeoData(string departure, string arrival);
     }
 }

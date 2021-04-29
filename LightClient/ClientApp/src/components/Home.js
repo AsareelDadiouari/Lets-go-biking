@@ -62,7 +62,7 @@ export class Home extends Component {
             }
         }).catch(err => {
             alert("An error has occured");
-            return;
+            
         })
     }
 

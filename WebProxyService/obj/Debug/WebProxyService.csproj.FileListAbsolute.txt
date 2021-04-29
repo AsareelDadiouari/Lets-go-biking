@@ -21,3 +21,4 @@ C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\obj\Debug\WebProxy
 C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\obj\Debug\WebProxyService.csproj.CopyComplete
 C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\obj\Debug\WebProxyService.dll
 C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\obj\Debug\WebProxyService.pdb
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\WebProxyService\obj\Debug\WebProxyService.csprojAssemblyReference.cache

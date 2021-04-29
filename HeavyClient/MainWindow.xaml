@@ -3,17 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HeavyClient"
         mc:Ignorable="d"
         Title="Let's go Biking" Height="500" Width="800"
         Icon="Assets/logo_small_icon_only.png"
-        ResizeMode="CanResizeWithGrip"
-        Closing="Window_Closing"
-        >
+        ResizeMode="CanResizeWithGrip">
     <Grid>
         <DockPanel>
             <Menu Width="Auto" DockPanel.Dock="Top" x:Name="menu" />
         </DockPanel>
-        <Frame x:Name="mainMenu" Margin="0,22,0,0" Source="/Data/ViewModels/MainMenu.xaml"/>
+        <Frame x:Name="mainMenu" Margin="0,22,0,0" Source="/Data/ViewModels/MainMenu.xaml" />
     </Grid>
 </Window>

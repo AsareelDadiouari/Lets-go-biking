@@ -10,17 +10,19 @@ namespace WebProxyService
     [ServiceContract]
     public interface IService1
     {
-
         [OperationContract]
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "Station?contract={contractName}&id={stationId}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare,
+            UriTemplate = "Station?contract={contractName}&id={stationId}")]
         Task<Station> GetOneStation(string contractName, int stationId);
 
         [OperationContract]
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "Stations")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare,
+            UriTemplate = "Stations")]
         Task<List<Station>> GetStations();
 
         [OperationContract]
-        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare, UriTemplate = "Stations?contract={contractName}")]
+        [WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json, BodyStyle = WebMessageBodyStyle.Bare,
+            UriTemplate = "Stations?contract={contractName}")]
         Task<List<Station>> GetStationsByContractName(string contractName);
     }
 }

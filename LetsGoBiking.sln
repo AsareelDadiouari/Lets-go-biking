@@ -19,9 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HeavyClient", "HeavyClient\HeavyClient.csproj", "{F9A5815E-7CC8-40D1-8431-967F3B711736}"
-	ProjectSection(ProjectDependencies) = postProject
-		{2DD822B8-16E6-4383-BAF5-FD15872DFCB7} = {2DD822B8-16E6-4383-BAF5-FD15872DFCB7}
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host", "Host\Host.csproj", "{0393FD26-930E-43F5-9DE8-89E5022C6832}"
 	ProjectSection(ProjectDependencies) = postProject

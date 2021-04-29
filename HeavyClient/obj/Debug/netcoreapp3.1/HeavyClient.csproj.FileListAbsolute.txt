@@ -22,7 +22,6 @@ C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\HeavyClient\obj\Debug\netcoreapp3.
 C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\HeavyClient\obj\Debug\netcoreapp3.1\MainWindow.g.cs
 C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\HeavyClient\obj\Debug\netcoreapp3.1\App.g.cs
 C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\HeavyClient\obj\Debug\netcoreapp3.1\HeavyClient_MarkupCompile.cache
-C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\HeavyClient\obj\Debug\netcoreapp3.1\HeavyClient_MarkupCompile.lref
 C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\HeavyClient\obj\Debug\netcoreapp3.1\Data\ViewModels\MainMenu.baml
 C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\HeavyClient\obj\Debug\netcoreapp3.1\Data\ViewModels\Map.baml
 C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\HeavyClient\obj\Debug\netcoreapp3.1\MainWindow.baml
@@ -59,3 +58,4 @@ C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\HeavyClient\bin\Debug\netcoreapp3.
 C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\HeavyClient\bin\Debug\netcoreapp3.1\runtimes\win\native\grpc_csharp_ext.x64.dll
 C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\HeavyClient\bin\Debug\netcoreapp3.1\runtimes\win\native\grpc_csharp_ext.x86.dll
 C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\HeavyClient\obj\Debug\netcoreapp3.1\HeavyClient.csprojAssemblyReference.cache
+C:\Users\dyiem\OneDrive\Bureau\Lets-go-biking\HeavyClient\bin\Debug\netcoreapp3.1\DocumentFormat.OpenXml.dll

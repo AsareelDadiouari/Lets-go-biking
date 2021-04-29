@@ -1,43 +1,56 @@
-﻿using Routing;
-using System.ComponentModel;
+﻿using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Spreadsheet;
+using HeavyClient.Config;
+using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+
 namespace HeavyClient
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        Service1Client service1 = new Service1Client();
-
+        public static List<string> routeSearches = new List<string>(); 
+        public static uint lineCounter = 1;
         public MainWindow()
         {
             InitializeComponent();
+            SetMenu();
+        }
 
-            MenuItem logs = new MenuItem()
+        private void SetMenu()
+        {
+            var logs = new MenuItem
             {
                 Header = "Logs",
                 FontSize = 15
             };
-            MenuItem quit = new MenuItem()
+            var quit = new MenuItem
             {
                 Header = "Quit",
-                FontSize = 15,
+                FontSize = 15
             };
             quit.Click += On_Quit_Click;
 
-            MenuItem export = new MenuItem()
+            var export = new MenuItem
             {
                 Header = "Export",
                 FontSize = 15
             };
+            export.Click += On_Export;
 
-            MenuItem mainItem = new MenuItem()
+            var mainItem = new MenuItem
             {
                 Header = "Menu",
-                FontSize = 15,
+                FontSize = 15
             };
 
             mainItem.Items.Add(logs);
@@ -48,13 +61,237 @@ namespace HeavyClient
             mainMenu.NavigationUIVisibility = NavigationUIVisibility.Automatic;
         }
 
-        private void Window_Closing(object sender, CancelEventArgs e)
-        {
-        }
-
         private void On_Quit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void On_Export(object sender, RoutedEventArgs e)
+        {
+            var statsToSave = Data.ViewModels.Map.statsToSave;
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Excel Files|*.xlsx;*.csv;*.xlsm;*.xls";
+            saveFileDialog.Title = "Save Datasheet";
+            saveFileDialog.CheckPathExists = true;
+            saveFileDialog.RestoreDirectory = true;
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                string filename = saveFileDialog.FileName;
+                try
+                {
+                    SaveExelFile(filename, statsToSave, routeSearches);
+                    MessageBox.Show("Statistics were successfully saved", "OK", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message, null, MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                }
+
+                if (!File.Exists(filename))
+                {
+                    MessageBox.Show("Could'nt create File, an error has occured", null, MessageBoxButton.OKCancel, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void SaveExelFile(string filename, List<StationStatistics> stationStatistics, List<string> routeSearches)
+        {
+            using (SpreadsheetDocument spreadSheet = SpreadsheetDocument.Create(filename, SpreadsheetDocumentType.Workbook))
+            {
+                WorkbookPart workbookPart = spreadSheet.AddWorkbookPart();
+                workbookPart.Workbook = new Workbook();
+
+                WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>();
+                worksheetPart.Worksheet = new Worksheet(new SheetData());
+
+                for(char letter = 'A'; letter <= 'E'; letter++ )
+                {
+                    if (letter == 'A')
+                        InsertDataAtCell("Departure", letter.ToString(), 1, worksheetPart, spreadSheet);
+                    else if (letter == 'B')
+                        InsertDataAtCell("Arrival", letter.ToString(), 1, worksheetPart, spreadSheet);
+                    else if (letter == 'C')
+                        InsertDataAtCell("Distance", letter.ToString(), 1, worksheetPart, spreadSheet);
+                    else if (letter == 'D')
+                        InsertDataAtCell("Duration", letter.ToString(), 1, worksheetPart, spreadSheet);
+                    else if (letter == 'E')
+                        InsertDataAtCell("Searched AT", letter.ToString(), 1, worksheetPart, spreadSheet);
+                }
+
+                for(int i = 1; i < routeSearches.Count; i+=2)
+                {
+                    MainWindow.lineCounter++;
+                    string dep = routeSearches[i - 1].Split('-')[0];
+                    string arr = routeSearches[i - 1].Split('-')[1];
+                    string distance = routeSearches[i].Split('-')[0];
+                    string searchAt = routeSearches[i].Split('-')[1];
+                    string duration = routeSearches[i].Split('-')[2];
+
+                    for (char letter = 'A'; letter <= 'E'; letter++)
+                    {
+                        if (letter == 'A')
+                            InsertDataAtCell(dep, letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                        else if (letter == 'B')
+                            InsertDataAtCell(arr, letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                        else if (letter == 'C')
+                            InsertDataAtCell(distance, letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                        else if (letter == 'D')
+                            InsertDataAtCell(duration, letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                        else if (letter == 'E')
+                            InsertDataAtCell(searchAt, letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                    }
+                }
+
+                MainWindow.lineCounter += 2;
+
+                for (char letter = 'A'; letter <= 'F'; letter++)
+                {
+                    if (letter == 'A')
+                        InsertDataAtCell("Number", letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                    else if (letter == 'B')
+                        InsertDataAtCell("Name", letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                    else if (letter == 'C')
+                        InsertDataAtCell("Contract", letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                    else if (letter == 'D')
+                        InsertDataAtCell("Adress", letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                    else if (letter == 'E')
+                        InsertDataAtCell("Occurence", letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                    else if (letter == 'F')
+                        InsertDataAtCell("Type", letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                }
+
+                for (int i = 0; i < stationStatistics.Count; i++)
+                {
+                    MainWindow.lineCounter++;
+
+                    for (char letter = 'A'; letter <= 'F'; letter++)
+                    {
+                        if (letter == 'A')
+                            InsertDataAtCell(stationStatistics[i].station.number.ToString(), letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                        else if (letter == 'B')
+                            InsertDataAtCell(stationStatistics[i].station.name, letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                        else if (letter == 'C')
+                            InsertDataAtCell(stationStatistics[i].station.contractName, letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                        else if (letter == 'D')
+                            InsertDataAtCell(stationStatistics[i].station.address, letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                        else if (letter == 'E')
+                            InsertDataAtCell(stationStatistics[i].occurence.ToString(), letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                        else if (letter == 'F')
+                            InsertDataAtCell(stationStatistics[i].type.ToString(), letter.ToString(), MainWindow.lineCounter, worksheetPart, spreadSheet);
+                    }
+                }
+
+
+                Sheets sheets = spreadSheet.WorkbookPart.Workbook.AppendChild<Sheets>(new Sheets());
+                Sheet sheet = new Sheet()
+                {
+                    Id = spreadSheet.WorkbookPart.GetIdOfPart(worksheetPart),
+                    SheetId = 1,
+                    Name = "Stats"
+                };
+                sheets.Append(sheet);
+            }
+
+        }
+
+        private void InsertDataAtCell(string data, string column, uint row, WorksheetPart worksheetPart, SpreadsheetDocument spreadSheet)
+        {
+
+            // Get the SharedStringTablePart. If it does not exist, create a new one.
+            SharedStringTablePart shareStringPart;
+            if (spreadSheet.WorkbookPart.GetPartsOfType<SharedStringTablePart>().Count() > 0)
+            {
+                shareStringPart = spreadSheet.WorkbookPart.GetPartsOfType<SharedStringTablePart>().First();
+            }
+            else
+            {
+                shareStringPart = spreadSheet.WorkbookPart.AddNewPart<SharedStringTablePart>();
+            }
+
+            // Insert the text into the SharedStringTablePart.
+            int index = InsertSharedStringItem(data, shareStringPart);
+
+            Cell cell = InsertCellInWorksheet(column, row, worksheetPart);
+
+            cell.CellValue = new CellValue(index.ToString());
+            cell.DataType = new EnumValue<CellValues>(CellValues.SharedString);
+
+            // Save the new worksheet.
+            worksheetPart.Worksheet.Save();
+        }
+
+        private static Cell InsertCellInWorksheet(string columnName, uint rowIndex, WorksheetPart worksheetPart)
+        {
+            Worksheet worksheet = worksheetPart.Worksheet;
+            SheetData sheetData = worksheet.GetFirstChild<SheetData>();
+            string cellReference = columnName + rowIndex;
+
+            // If the worksheet does not contain a row with the specified row index, insert one.
+            Row row;
+            if (sheetData.Elements<Row>().Where(r => r.RowIndex == rowIndex).Count() != 0)
+            {
+                row = sheetData.Elements<Row>().Where(r => r.RowIndex == rowIndex).First();
+            }
+            else
+            {
+                row = new Row() { RowIndex = rowIndex };
+                sheetData.Append(row);
+            }
+
+            // If there is not a cell with the specified column name, insert one.  
+            if (row.Elements<Cell>().Where(c => c.CellReference.Value == columnName + rowIndex).Count() > 0)
+            {
+                return row.Elements<Cell>().Where(c => c.CellReference.Value == cellReference).First();
+            }
+            else
+            {
+                // Cells must be in sequential order according to CellReference. Determine where to insert the new cell.
+                Cell refCell = null;
+                foreach (Cell cell in row.Elements<Cell>())
+                {
+                    if (string.Compare(cell.CellReference.Value, cellReference, true) > 0)
+                    {
+                        refCell = cell;
+                        break;
+                    }
+                }
+
+                Cell newCell = new Cell() { CellReference = cellReference };
+                row.InsertBefore(newCell, refCell);
+
+                worksheet.Save();
+                return newCell;
+            }
+        }
+        // Given text and a SharedStringTablePart, creates a SharedStringItem with the specified text 
+        // and inserts it into the SharedStringTablePart. If the item already exists, returns its index.
+        private static int InsertSharedStringItem(string text, SharedStringTablePart shareStringPart)
+        {
+            // If the part does not contain a SharedStringTable, create one.
+            if (shareStringPart.SharedStringTable == null)
+            {
+                shareStringPart.SharedStringTable = new SharedStringTable();
+            }
+
+            int i = 0;
+
+            // Iterate through all the items in the SharedStringTable. If the text already exists, return its index.
+            foreach (SharedStringItem item in shareStringPart.SharedStringTable.Elements<SharedStringItem>())
+            {
+                if (item.InnerText == text)
+                {
+                    return i;
+                }
+
+                i++;
+            }
+
+            // The text does not exist in the part. Create the SharedStringItem and return its index.
+            shareStringPart.SharedStringTable.AppendChild(new SharedStringItem(new DocumentFormat.OpenXml.Spreadsheet.Text(text)));
+            shareStringPart.SharedStringTable.Save();
+
+            return i;
         }
     }
 }

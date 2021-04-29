@@ -2,7 +2,7 @@
 
 namespace WebProxyService
 {
-    interface ICache<T>
+    internal interface ICache<T>
     {
         T Get(string CacheItem);
         T Get(string CacheItem, double dt_seconds);

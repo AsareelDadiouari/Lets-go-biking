@@ -5,19 +5,18 @@ namespace WebProxyService.JSONClasses
 {
     public class Position
     {
-        public double latitude { get; set; }
-        public double longitude { get; set; }
-
         public Position(double lat, double lon)
         {
-            this.latitude = lat;
-            this.longitude = lon;
+            latitude = lat;
+            longitude = lon;
         }
 
         public Position()
         {
-
         }
+
+        public double latitude { get; set; }
+        public double longitude { get; set; }
 
         public double getDistanceTo(Position other)
         {
@@ -29,13 +28,12 @@ namespace WebProxyService.JSONClasses
 
             return 6376500.0 * (2.0 * Math.Atan2(Math.Sqrt(d3), Math.Sqrt(1.0 - d3)));*/
             return Math.Sqrt(Math.Pow(other.longitude - longitude, 2) + Math.Pow(other.latitude - latitude, 2));
-
         }
 
         public override bool Equals(object obj)
         {
-            Position other = (Position)obj;
-            return this.latitude == other.latitude && this.longitude == other.longitude;
+            var other = (Position)obj;
+            return latitude == other.latitude && longitude == other.longitude;
         }
     }
 
@@ -87,8 +85,8 @@ namespace WebProxyService.JSONClasses
 
         public override bool Equals(object obj)
         {
-            Station other = (Station)obj;
-            return this.number == other.number && this.name.Equals(other.name) && this.contractName.Equals(other.contractName);
+            var other = (Station)obj;
+            return number == other.number && name.Equals(other.name) && contractName.Equals(other.contractName);
         }
     }
 
@@ -96,5 +94,4 @@ namespace WebProxyService.JSONClasses
     {
         public List<Station> stations { get; set; }
     }
-
 }
