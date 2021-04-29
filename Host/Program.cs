@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.ServiceModel;
 using System.Threading;
 using WebProxyService;
@@ -8,27 +10,39 @@ namespace Host
 {
     internal class Program
     {
-        private static readonly string WebProxyServiceUrl =
-            "http://localhost:8733/Design_Time_Addresses/WebProxyService/Service1/";
-
-        private static readonly string RoutingUrl = "http://localhost:8733/Design_Time_Addresses/Routing/Service1/";
+        private static readonly string pathToLight = Directory.GetParent(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.FullName).Parent.FullName + "\\LightClient\\ClientApp";
 
         private static void Main(string[] args)
         {
-            var webPorxyServiceBaseAdr = new Uri(WebProxyServiceUrl);
-            var routingWebServiceBaseAdr = new Uri(RoutingUrl);
+            var tProxy = new Thread(LaunchWebProxy);
+            var tRouting = new Thread(LaunchRouting);
+            var tNpmInstall = new Thread(LaunchNpmInstall);
+            var tNpmStart = new Thread(LaunchNpmStart);
 
-            var tProxy = new Thread(launchWebProxy);
-            var tRouting = new Thread(launchRouting);
+            tProxy.Start();
+            tRouting.Start();
 
-            tProxy.Start(webPorxyServiceBaseAdr);
-            tRouting.Start(routingWebServiceBaseAdr);
+            if (Directory.Exists(pathToLight + "node_modules") == false)
+            {
+                tNpmInstall.Start();
+                tNpmInstall.Join();
+            }
+               
+            if (tNpmInstall.IsAlive == false)
+            {
+                tNpmStart.Start();
+                tProxy.Join();
+                tRouting.Join();
+                tNpmStart.Join();
+            }
 
-            tProxy.Join();
-            tRouting.Join();
+            if (tRouting.IsAlive == false || tProxy.IsAlive == false)
+            {
+                tNpmStart.Interrupt();
+            }
         }
 
-        private static void launchWebProxy(object webPorxyServiceBaseAdr)
+        private static void LaunchWebProxy()
         {
             using (var selfHost = new ServiceHost(typeof(Service1)))
             {
@@ -53,7 +67,7 @@ namespace Host
             ;
         }
 
-        private static void launchRouting(object routingWebServiceBaseAdr)
+        private static void LaunchRouting()
         {
             using (var selfHost = new ServiceHost(typeof(Routing.Service1)))
             {
@@ -77,6 +91,45 @@ namespace Host
             }
 
             ;
+        }
+
+        private static void LaunchNpmInstall()
+        {
+
+                var npmInstallProcess = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        WorkingDirectory = (string)pathToLight,
+                        FileName = "npm.cmd",
+                        Arguments = "install",
+                        RedirectStandardOutput = false
+                    }
+                };
+
+                npmInstallProcess.Start();
+                npmInstallProcess.WaitForExit();   
+        }
+
+        private static void LaunchNpmStart()
+        {
+            var npmStartProcess = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    WorkingDirectory =pathToLight,
+                    FileName = "npm.cmd",
+                    Arguments = "start",
+                    RedirectStandardOutput = false,
+                }
+            };
+
+            npmStartProcess.Start();
+            Console.WriteLine("The Light Client is running at localhost:3000");
+            Console.WriteLine();
+            Console.ReadLine();
+            Console.WriteLine("The LightClient is closed");
+            npmStartProcess.Close();
         }
     }
 }

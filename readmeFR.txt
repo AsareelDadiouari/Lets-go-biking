@@ -1,0 +1,2 @@
+Sous Windows Lancer le script runAll.cmd
+Le client léger est lancé sur http://localhost:3000/
