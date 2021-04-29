@@ -22,7 +22,7 @@ namespace Host
             tProxy.Start();
             tRouting.Start();
 
-            if (Directory.Exists(pathToLight + "node_modules") == false)
+            if (Directory.Exists(pathToLight + "\\node_modules") == false)
             {
                 tNpmInstall.Start();
                 tNpmInstall.Join();
