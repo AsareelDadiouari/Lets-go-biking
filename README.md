@@ -86,8 +86,8 @@ Now you can restart WindowsRun.cmd and get a working Server and HeavyClient.
 
 * > Windows Defender SmartScreen prevented an unrecognized app from starting. Running this app might put your PC at risk.
 
-Obviously the program is not intended to harm your computer. To resolve this issue:
+  Obviously the program is not intended to harm your computer. To resolve this issue:
 
-1. Right click on WindowsRun.cmd
-2. Select properties option.
-3. Click on checkbox to check Unblock at the bottom of Properties.
+        1. Right click on WindowsRun.cmd
+        2. Select properties option.
+        3. Click on checkbox to check Unblock at the bottom of Properties.

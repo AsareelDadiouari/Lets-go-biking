@@ -35,6 +35,11 @@ namespace WebProxyService.JSONClasses
             var other = (Position) obj;
             return latitude == other.latitude && longitude == other.longitude;
         }
+
+        public override int GetHashCode()
+        {
+            return (latitude, longitude).GetHashCode();
+        }
     }
 
     public class Availabilities
@@ -87,6 +92,11 @@ namespace WebProxyService.JSONClasses
         {
             var other = (Station) obj;
             return number == other.number && name.Equals(other.name) && contractName.Equals(other.contractName);
+        }
+
+        public override int GetHashCode()
+        {
+            return (number, contractName, address, name).GetHashCode();
         }
     }
 

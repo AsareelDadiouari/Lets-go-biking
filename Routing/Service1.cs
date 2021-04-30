@@ -94,7 +94,7 @@ namespace Routing
                         var responseData2 = webClient.DownloadString(fromDepartStationToEndStation);
                         data2 = JsonConvert.DeserializeObject<Geo.GeoJson>(responseData2);
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         data2 = new Geo.GeoJson();
                     }
@@ -104,7 +104,7 @@ namespace Routing
                         var responseData3 = webClient.DownloadString(fromEndStationToEndClient);
                         data3 = JsonConvert.DeserializeObject<Geo.GeoJson>(responseData3);
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         data3 = new Geo.GeoJson();
                     }
@@ -135,7 +135,7 @@ namespace Routing
 
                         return Task.FromResult(glob);
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         return Task.FromResult(new List<Geo.GeoJson>());
                     }
@@ -161,7 +161,7 @@ namespace Routing
                     geoJsons.Add(data);
                     return Task.FromResult(geoJsons);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     return Task.FromResult(geoJsons);
                 }
@@ -191,7 +191,7 @@ namespace Routing
                     return Task.FromResult(longitude.ToString().Replace(',', '.') + "," +
                                            latitude.ToString().Replace(',', '.'));
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return null;
                 }
@@ -231,7 +231,7 @@ namespace Routing
                             break;
                         }
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                     }
                 }
@@ -267,7 +267,7 @@ namespace Routing
                                 break;
                             }
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                         }
                     }

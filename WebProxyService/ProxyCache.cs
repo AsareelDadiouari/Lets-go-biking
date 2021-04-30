@@ -33,7 +33,7 @@ namespace WebProxyService
                             var response = webClient.DownloadString(url);
                             station = JsonConvert.DeserializeObject<Station>(response);
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                             station = new Station();
                         }
@@ -66,7 +66,7 @@ namespace WebProxyService
                             var response = webClient.DownloadString(url);
                             station = JsonConvert.DeserializeObject<Station>(response);
                         }
-                        catch (Exception e)
+                        catch (Exception )
                         {
                             station = new Station();
                         }
@@ -100,7 +100,7 @@ namespace WebProxyService
                             var response = webClient.DownloadString(url);
                             station = JsonConvert.DeserializeObject<Station>(response);
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                             station = new Station();
                         }

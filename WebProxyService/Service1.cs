@@ -40,7 +40,7 @@ namespace WebProxyService
                     myDeserializedClass = records;
                     return Task.FromResult(myDeserializedClass);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     return Task.FromResult(new List<Station>());
                 }
@@ -68,7 +68,7 @@ namespace WebProxyService
                     var myDeserializedClass = JsonConvert.DeserializeObject<List<Station>>(data);
                     return Task.FromResult(myDeserializedClass);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     return Task.FromResult(new List<Station>());
                 }
