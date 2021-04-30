@@ -1,6 +1,7 @@
 ﻿import React, { Component,  } from 'react';
 //import PropTypes from 'prop-types';
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from 'react-leaflet'
+import {Table} from 'react-bootstrap'
 
 class Map extends Component {
     constructor(props, context) {
@@ -23,21 +24,35 @@ class Map extends Component {
             station2: station2 === null ? [] : [station2.position.latitude, station2.position.longitude],
             coords: coords
         }
-
     }
 
-    handleClick = (e) => {
+    backToHome = (e) => {
         e.preventDefault();
         this.props.history.push({
             pathname: '/',
         })
     }
-
+    
     render() {
         return (
-            <div className="container-fluid">
-                <button type="button" onClick={this.handleClick} className="btn btn-primary">Back</button>
-                  <MapContainer center={this.state.departure} zoom={13} scrollWheelZoom={false}>
+            <div id="map" style={this.container} >
+                <button type="button" onClick={this.backToHome} className="btn btn-primary">Back</button>
+                {
+                    this.state.station1.length === 0 ? 
+                        <React.Fragment>
+                            <th>Total Distance: {(this.state.coords[0].features[0].properties.summary.distance/1000).toFixed(2)} km</th>
+                        </React.Fragment>
+                        :
+                        <React.Fragment>
+                            <div className="d-flex justify-content-between">
+                                <th>🔴Distance to Departure Station: {(this.state.coords[0].features[0].properties.summary.distance/1000).toFixed(2)} km</th>
+                                <th>🟡Departure Station to Arrival Station: {(this.state.coords[1].features[0].properties.summary.distance/1000).toFixed(2)} km</th>
+                                <th>🟢Arrival Station to Arrival: {(this.state.coords[2].features[0].properties.summary.distance/1000).toFixed(2)} km</th>
+                            </div>
+                        </React.Fragment>
+                }
+                
+                  <MapContainer fullscreenControl={true} style={{ height: "70vh", width: "100%" }} center={this.state.departure} zoom={13} scrollWheelZoom={true}>
                     <TileLayer
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -56,12 +71,12 @@ class Map extends Component {
                             <React.Fragment>
                                 < Marker position={this.state.station1}>
                                     <Popup>
-                                        Departure Station
+                                        Departure Station [{this.state.coords[0].station.address}]
                                     </Popup>
                                 </Marker>
                                 <Marker position={this.state.station2}>
-                                    <Popup>
-                                        Arrival Station
+                                    <Popup>     
+                                        Arrival Station [{this.state.coords[this.state.coords.length - 1].station.address}]
                                     </Popup>
                                 </Marker>
                             </React.Fragment>
@@ -73,7 +88,65 @@ class Map extends Component {
                             Departure
                         </Popup>
                     </Marker>
-                </MapContainer>
+                  </MapContainer>
+                
+                <div className="d-flex justify-content-center" >
+                    <div>
+                        <p className="text-center h5">Departure Station</p>
+                        
+                        {
+                            this.state.station1.length === 0 ? 'Unavailable' :
+                                <React.Fragment>
+                                    <Table striped bordered hover variant="dark">
+                                        <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Address</th>
+                                            <th>Town</th>
+                                            <th>Bikes</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>{this.state.coords[0].station.name}</td>
+                                            <td>{this.state.coords[0].station.address}</td>
+                                            <td>{this.state.coords[0].station.contractName}</td>
+                                            <td>{this.state.coords[0].station.mainStands.availabilities.bikes}</td>
+                                        </tr>
+                                        </tbody>
+                                    </Table>
+                                </React.Fragment>
+                        }
+                    </div>
+                    <td>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <div>
+                        <p className=" text-center h5">Arrival Station</p>
+
+                        {
+                            this.state.station2.length === 0 ? 'Unavailable' : 
+                                <React.Fragment>
+                                    <Table striped bordered hover variant="dark">
+                                        <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Address</th>
+                                            <th>Town</th>
+                                            <th>Capacity</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>{this.state.coords[this.state.coords.length - 1].station.name}</td>
+                                            <td>{this.state.coords[this.state.coords.length - 1].station.address}</td>
+                                            <td>{this.state.coords[this.state.coords.length - 1].station.contractName}</td>
+                                            <td>{this.state.coords[this.state.coords.length - 1].station.mainStands.capacity}</td>
+                                        </tr>
+                                        </tbody>
+                                    </Table>
+                                </React.Fragment>
+                        }
+                    </div>
+                </div>
 
             </div>
             )
