@@ -1,8 +1,8 @@
-﻿using Routing.JSONClasses;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Threading.Tasks;
+using Routing.JSONClasses;
 
 namespace Routing
 {

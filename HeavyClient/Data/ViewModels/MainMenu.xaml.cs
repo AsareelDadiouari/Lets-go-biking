@@ -1,9 +1,9 @@
-﻿using Google.Cloud.Firestore;
-using HeavyClient.Config;
-using Routing;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using Google.Cloud.Firestore;
+using HeavyClient.Config;
+using Routing;
 using static HeavyClient.Config.StationStatistics;
 using Station = Routing.Station;
 

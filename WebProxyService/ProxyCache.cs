@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Net;
 using System.Runtime.Caching;
+using Newtonsoft.Json;
 using WebProxyService.JSONClasses;
 
 namespace WebProxyService
@@ -22,7 +22,7 @@ namespace WebProxyService
             var url = "https://api.jcdecaux.com/vls/v3/stations/" + stationId + "?contract=" + contractName +
                       "&apiKey=" + apiKey;
 
-            var item = (T)cache.Get(stationId);
+            var item = (T) cache.Get(stationId);
             if (item == null)
                 using (var webClient = new WebClient())
                 {
@@ -46,7 +46,7 @@ namespace WebProxyService
                     cache.Set(stationId, station, cacheItemPolicy);
                 }
 
-            return (T)cache[stationId];
+            return (T) cache[stationId];
         }
 
         public T Get(string CacheItem, DateTimeOffset dt)
@@ -55,7 +55,7 @@ namespace WebProxyService
             var url = "https://api.jcdecaux.com/vls/v3/stations/" + stationId + "?contract=" + contractName +
                       "&apiKey=" + apiKey;
 
-            var item = (T)cache.Get(stationId);
+            var item = (T) cache.Get(stationId);
             if (item == null)
                 using (var webClient = new WebClient())
                 {
@@ -79,7 +79,7 @@ namespace WebProxyService
                     cache.Set(stationId, station, cacheItemPolicy);
                 }
 
-            return (T)cache[stationId];
+            return (T) cache[stationId];
             ;
         }
 
@@ -89,7 +89,7 @@ namespace WebProxyService
             var url = "https://api.jcdecaux.com/vls/v3/stations/" + stationId + "?contract=" + contractName +
                       "&apiKey=" + apiKey;
 
-            var item = (T)cache.Get(stationId);
+            var item = (T) cache.Get(stationId);
             if (item == null)
                 using (var webClient = new WebClient())
                 {
@@ -113,7 +113,7 @@ namespace WebProxyService
                     cache.Set(stationId, station, cacheItemPolicy);
                 }
 
-            return (T)cache[stationId];
+            return (T) cache[stationId];
         }
     }
 }

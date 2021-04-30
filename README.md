@@ -9,7 +9,7 @@ Requirements
 -----------
 <ul>
     <li> <a href="https://nodejs.org/en/">Node</a></li>
-    <li> <a href="https://dotnet.microsoft.com/download/dotnet/3.1">.NET CORE 3.1</a></li>
+    <li> <a href="https://dotnet.microsoft.com/download">.NET CORE 3.1</a></li>
     <li> <a href="https://dotnet.microsoft.com/download/dotnet-framework/net472">.NET Framework v4.7.2</a></li>
 </ul>
 
@@ -71,15 +71,23 @@ Lets-go-biking
 
 Technical Issues
 -----------
-Some users might encounter minor when starting the launch file such as:
+Some users might encounter minor issues when starting the launch file such as:
     
-> HTTP could not register URL http://+:8733/Design_Time_Addresses/Routing/Service. Your process does not have access rights to this namespace (see http://go.microsoft.com/fwlink/?LinkId=70353 for details).
+* > HTTP could not register URL http://+:8733/Design_Time_Addresses/Routing/Service. Your process does not have access rights to this namespace (see http://go.microsoft.com/fwlink/?LinkId=70353 for details).
 
 To resolve this issue, please follow step by step the indications below.
 
-* Open a powershell or command-line terminal with Administrator rights.
-* Type ``net user`` to see all users on your computer, and retain your user name.
-* Type ``netsh http add urlacl url=http://+:8733/Design_Time_Addresses/ user=<username>`` and replace ``username`` with yours.
-* If the addition is successful you should see ``URL reservation successfully added``
+1. Open a powershell or command-line terminal with Administrator rights.
+2. Type ``net user`` to see all users on your computer, and retain your user name.
+3. Type ``netsh http add urlacl url=http://+:8733/Design_Time_Addresses/ user=<username>`` and replace ``username`` with yours.
+4. If the addition is successful you should see ``URL reservation successfully added``
 
 Now you can restart WindowsRun.cmd and get a working Server and HeavyClient.
+
+* > Windows Defender SmartScreen prevented an unrecognized app from starting. Running this app might put your PC at risk.
+
+Obviously the program is not intended to harm your computer. To resolve this issue:
+
+1. Right click on WindowsRun.cmd
+2. Select properties option.
+3. Click on checkbox to check Unblock at the bottom of Properties.

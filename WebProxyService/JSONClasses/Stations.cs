@@ -32,7 +32,7 @@ namespace WebProxyService.JSONClasses
 
         public override bool Equals(object obj)
         {
-            var other = (Position)obj;
+            var other = (Position) obj;
             return latitude == other.latitude && longitude == other.longitude;
         }
     }
@@ -85,7 +85,7 @@ namespace WebProxyService.JSONClasses
 
         public override bool Equals(object obj)
         {
-            var other = (Station)obj;
+            var other = (Station) obj;
             return number == other.number && name.Equals(other.name) && contractName.Equals(other.contractName);
         }
     }

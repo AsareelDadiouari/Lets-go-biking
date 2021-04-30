@@ -1,4 +1,4 @@
-For linux users only, run the LinuxRun.sh script
+For Windows users only, run the WindonwsRun.cmd script
 The light client is hosted on http://localhost:3000/
 
 If you encounter errors when starting programs

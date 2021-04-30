@@ -10,7 +10,9 @@ namespace Host
 {
     internal class Program
     {
-        private static readonly string pathToLight = Directory.GetParent(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.FullName).Parent.FullName + "\\LightClient\\ClientApp";
+        private static readonly string pathToLight =
+            Directory.GetParent(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.FullName).Parent
+                .FullName + "\\LightClient\\ClientApp";
 
         private static void Main(string[] args)
         {
@@ -27,7 +29,7 @@ namespace Host
                 tNpmInstall.Start();
                 tNpmInstall.Join();
             }
-               
+
             if (tNpmInstall.IsAlive == false)
             {
                 tNpmStart.Start();
@@ -36,10 +38,7 @@ namespace Host
                 tNpmStart.Join();
             }
 
-            if (tRouting.IsAlive == false || tProxy.IsAlive == false)
-            {
-                tNpmStart.Interrupt();
-            }
+            if (tRouting.IsAlive == false || tProxy.IsAlive == false) tNpmStart.Interrupt();
         }
 
         private static void LaunchWebProxy()
@@ -95,20 +94,19 @@ namespace Host
 
         private static void LaunchNpmInstall()
         {
-
-                var npmInstallProcess = new Process
+            var npmInstallProcess = new Process
+            {
+                StartInfo = new ProcessStartInfo
                 {
-                    StartInfo = new ProcessStartInfo
-                    {
-                        WorkingDirectory = (string)pathToLight,
-                        FileName = "npm.cmd",
-                        Arguments = "install",
-                        RedirectStandardOutput = false
-                    }
-                };
+                    WorkingDirectory = pathToLight,
+                    FileName = "npm.cmd",
+                    Arguments = "install",
+                    RedirectStandardOutput = false
+                }
+            };
 
-                npmInstallProcess.Start();
-                npmInstallProcess.WaitForExit();   
+            npmInstallProcess.Start();
+            npmInstallProcess.WaitForExit();
         }
 
         private static void LaunchNpmStart()
@@ -117,10 +115,10 @@ namespace Host
             {
                 StartInfo = new ProcessStartInfo
                 {
-                    WorkingDirectory =pathToLight,
+                    WorkingDirectory = pathToLight,
                     FileName = "npm.cmd",
                     Arguments = "start",
-                    RedirectStandardOutput = false,
+                    RedirectStandardOutput = false
                 }
             };
 

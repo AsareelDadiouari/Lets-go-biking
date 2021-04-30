@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-using Routing.JSONClasses;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Services.Client;
 using System.Device.Location;
@@ -9,6 +7,8 @@ using System.Linq;
 using System.Net;
 using System.ServiceModel.Web;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Routing.JSONClasses;
 using WebProxyService.JSONClasses;
 
 namespace Routing
@@ -17,13 +17,13 @@ namespace Routing
     public class Service1 : IService1
     {
         private static string urlWebProxyStations;
-        private readonly string apiKey;
         private readonly List<Station> allStations;
-        private Town.TownJson clientAdress;
-        private Station closestDepartureStation, closestArrivalStation;
+        private readonly string apiKey;
         private readonly WebOperationContext ctx;
         private readonly string responseDataFromAllStation;
         private readonly List<GeoCoordinate> StationsGeocoordinates;
+        private Town.TownJson clientAdress;
+        private Station closestDepartureStation, closestArrivalStation;
 
         public Service1()
         {
