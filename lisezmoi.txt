@@ -1,2 +1,5 @@
 Sous Windows Lancer le script WindowsRun.cmd
 Le client léger est lancé sur http://localhost:3000/
+
+Si vous rencontrer des erreurs dans le démarrage des programmes
+veuillez vous referer au lien suivant https://github.com/AsareelDadiouari/Lets-go-biking/blob/main/README.md

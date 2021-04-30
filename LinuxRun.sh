@@ -1,5 +1,6 @@
 #!/bin/bash
+# shellcheck disable=SC2164
 cd Host/bin/Debug/
-sudo ./Host.exe
+mono ./Host.exe
 cd ../../../HeavyClient/bin/Debug/netcoreapp3.1
-sudo ./HeavyClient.exe
+mono ./HeavyClient.exe
