@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.ServiceModel;
 using System.Threading;
 using WebProxyService;
@@ -14,13 +15,15 @@ namespace Host
             Directory.GetParent(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.FullName).Parent
                 .FullName + "\\LightClient\\ClientApp";
 
+        [DllImport("user32.dll")]
+        static extern int SetWindowText(IntPtr hWnd, string text);
         private static void Main(string[] args)
         {
             var tProxy = new Thread(LaunchWebProxy);
             var tRouting = new Thread(LaunchRouting);
             var tNpmInstall = new Thread(LaunchNpmInstall);
             var tNpmStart = new Thread(LaunchNpmStart);
-
+            
             tProxy.Start();
             tRouting.Start();
 
@@ -33,11 +36,13 @@ namespace Host
             if (tNpmInstall.IsAlive == false)
             {
                 tNpmStart.Start();
-                tProxy.Join();
-                tRouting.Join();
                 tNpmStart.Join();
             }
+            
+            tProxy.Join();
+            tRouting.Join();
 
+            
             if (tRouting.IsAlive == false || tProxy.IsAlive == false) tNpmStart.Interrupt();
         }
 
@@ -106,6 +111,8 @@ namespace Host
             };
 
             npmInstallProcess.Start();
+            Thread.Sleep(500);
+            SetWindowText(npmInstallProcess.MainWindowHandle, "NPM install");
             npmInstallProcess.WaitForExit();
         }
 
@@ -118,16 +125,19 @@ namespace Host
                     WorkingDirectory = pathToLight,
                     FileName = "npm.cmd",
                     Arguments = "start",
-                    RedirectStandardOutput = false
+                    RedirectStandardOutput = false,
                 }
             };
 
             npmStartProcess.Start();
+            Thread.Sleep(500);
+            SetWindowText(npmStartProcess.MainWindowHandle, "Light Client React");
             Console.WriteLine("The Light Client is running at localhost:3000");
+            Console.WriteLine("Press <Enter> to terminate the service.");
             Console.WriteLine();
             Console.ReadLine();
             Console.WriteLine("The LightClient is closed");
-            npmStartProcess.Close();
+            npmStartProcess.CloseMainWindow();
         }
     }
 }

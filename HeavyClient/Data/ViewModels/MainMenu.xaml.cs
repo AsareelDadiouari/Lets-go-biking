@@ -65,7 +65,7 @@ namespace HeavyClient.Data.ViewModels
                     var stationRef = stations.Document(sta.number.ToString());
                     await stationRef.UpdateAsync("occurence", FieldValue.Increment(1));
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     var stationStatistics = new StationStatistics
                     {
