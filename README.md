@@ -1,5 +1,5 @@
 # Lets-go-biking
-WCF Services, WPF Client, ASP .NET React
+![alt text](https://i.imgur.com/skWl39Z.png)
 
 The objective of this project is to create all the parts of an application which would allow the user to find its way from any location to any other location (in a same city for a first release) by using as much as possible the bikes offered by JC Decaux.
 
@@ -19,6 +19,9 @@ Launch All Modules of the project with a simple double click on:
         
     WindowsRun.cmd
 
+Project Architecture
+-----------
+![alt text](https://i.imgur.com/E3D15qY.png)
 
 Project Structure
 -----------
