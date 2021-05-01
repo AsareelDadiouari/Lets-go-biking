@@ -70,9 +70,15 @@ namespace HeavyClient.Data.ViewModels
                         {
                             Location = new Location(feature.value.geometry.coordinates[0][1],
                                 feature.value.geometry.coordinates[0][0]),
-                            ToolTip = "Departure"
+                            ToolTip = "Departure" 
                         };
-                        pins.Add(pin);
+
+                            var geo = this.geoJsons.Where(x => x.features[0].geometry.coordinates[0][1]
+                        .Equals(feature.value.geometry.coordinates[0][1]) && x.features[0].geometry.coordinates[0][0]
+                        .Equals(feature.value.geometry.coordinates[0][0])).Single();
+                            if (geo.station != null)
+                                DepartureStation.Content = geo.station.name;
+                            pins.Add(pin);
                         break;
                     case 1:
 
@@ -94,13 +100,14 @@ namespace HeavyClient.Data.ViewModels
                                 feature.value.geometry.coordinates[0][0]),
                             ToolTip = "Departure Station"
                         };
+       
                         pins.Add(pin1);
                         break;
                     case 2:
 
                         var routeLine3 = new MapPolyline
                         {
-                            Stroke = new SolidColorBrush(Colors.LightGreen),
+                            Stroke = new SolidColorBrush(Colors.Green),
                             StrokeThickness = 4
                         };
                         routeLine3.Locations = new LocationCollection();
@@ -116,6 +123,13 @@ namespace HeavyClient.Data.ViewModels
                                 feature.value.geometry.coordinates[0][0]),
                             ToolTip = "Arrival Station"
                         };
+                            var geo1 = this.geoJsons.Where(x => x.features[0].geometry.coordinates[0][1]
+                                .Equals(feature.value.geometry.coordinates[0][1]) && x.features[0].geometry.coordinates[0][0]
+                                .Equals(feature.value.geometry.coordinates[0][0])).Single();
+
+                            if (geo1.station != null)
+                                ArrivalStation.Content = geo1.station.name;
+
                         pins.Add(pin2);
                         break;
                 }
@@ -134,6 +148,12 @@ namespace HeavyClient.Data.ViewModels
                 Location = locs[locs.Count - 1],
                 ToolTip = "Arrival"
             };
+
+            if (pins.Count == 1)
+            {
+                depStackPane.Visibility = System.Windows.Visibility.Collapsed;
+                arrStackPane.Visibility = System.Windows.Visibility.Collapsed;
+            }
 
             MyMap.Children.Add(pinFinal);
         }
@@ -159,7 +179,7 @@ namespace HeavyClient.Data.ViewModels
             Distance.Content = dist / 1000 + "km";
             Duration.Content = dur / 3600 + "h";
 
-            MainWindow.routeSearches.Add(Distance.Content + "-" + DateTime.Now + "-" + Duration.Content);
+            MainWindow.routeSearches.Add(Distance.Content + "*" + DateTime.Now + "*" + Duration.Content);
 
             var lastSize = geoJsons[geoJsons.Length - 1].features[0].properties.segments[0].steps.Length - 1;
             DepartAdress.Content = geoJsons[0].features[0].properties.segments[0].steps[0].name;
@@ -218,7 +238,7 @@ namespace HeavyClient.Data.ViewModels
             var snapshotArrival = await stationsArrival.GetSnapshotAsync();
 
             var documents = snapshotDeparture.Documents.ToList().Union(snapshotArrival.Documents.ToList())
-                .OrderByDescending(x => x.ConvertTo<StationStatistics>().occurence);
+                .OrderByDescending(x => x.ConvertTo<StationStatistics>().occurence).GroupBy(x => x.Id).Select(y => y.First());
 
             foreach (var doc in documents.Take(5))
             {

@@ -21,6 +21,7 @@ namespace HeavyClient
     {
         public static List<string> routeSearches = new List<string>();
         public static uint lineCounter = 1;
+        public static bool exportedOnce = false;
 
         public MainWindow()
         {
@@ -85,6 +86,7 @@ namespace HeavyClient
                     SaveExelFile(filename, statsToSave, routeSearches);
                     MessageBox.Show("Statistics were successfully saved", "OK", MessageBoxButton.OK,
                         MessageBoxImage.Information);
+                    exportedOnce = true;
                 }
                 catch (Exception err)
                 {
@@ -111,7 +113,7 @@ namespace HeavyClient
                 var worksheetPart2 = workbookPart.AddNewPart<WorksheetPart>();
                 worksheetPart2.Worksheet = new Worksheet(new SheetData());
 
-                for (var letter = 'A'; letter <= 'E'; letter++)
+                for (var letter = 'A'; letter <= 'G'; letter++)
                     if (letter == 'A')
                         InsertDataAtCell("Departure", letter.ToString(), 1, worksheetPart, spreadSheet);
                     else if (letter == 'B')
@@ -122,17 +124,34 @@ namespace HeavyClient
                         InsertDataAtCell("Duration", letter.ToString(), 1, worksheetPart, spreadSheet);
                     else if (letter == 'E')
                         InsertDataAtCell("Searched AT", letter.ToString(), 1, worksheetPart, spreadSheet);
+                    else if (letter == 'F')
+                        InsertDataAtCell("Departure Station", letter.ToString(), 1, worksheetPart, spreadSheet);
+                    else if (letter == 'G')
+                        InsertDataAtCell("Arrival Station", letter.ToString(), 1, worksheetPart, spreadSheet);
+
+                if (exportedOnce)
+                    lineCounter = 1;
 
                 for (var i = 1; i < routeSearches.Count; i += 2)
                 {
                     lineCounter++;
-                    var dep = routeSearches[i - 1].Split('-')[0];
-                    var arr = routeSearches[i - 1].Split('-')[1];
-                    var distance = routeSearches[i].Split('-')[0];
-                    var searchAt = routeSearches[i].Split('-')[1];
-                    var duration = routeSearches[i].Split('-')[2];
 
-                    for (var letter = 'A'; letter <= 'E'; letter++)
+                    var route = routeSearches.ToList();
+                    var dep = route[i - 1].Split('*')[0];
+                    var arr = route[i - 1].Split('*')[1];
+                    var distance = route[i].Split('*')[0];
+                    var searchAt = route[i].Split('*')[1];
+                    var duration = route[i].Split('*')[2];
+                    string departureStation = "";
+                    string arrivalStation = "";
+
+                    if(route[i - 1].Split('*').Length > 2)
+                    {
+                        departureStation = route[i - 1].Split('*')[2];
+                        arrivalStation = route[i - 1].Split('*')[3];
+                    }
+
+                    for (var letter = 'A'; letter <= 'G'; letter++)
                         if (letter == 'A')
                             InsertDataAtCell(dep, letter.ToString(), lineCounter, worksheetPart, spreadSheet);
                         else if (letter == 'B')
@@ -143,46 +162,50 @@ namespace HeavyClient
                             InsertDataAtCell(duration, letter.ToString(), lineCounter, worksheetPart, spreadSheet);
                         else if (letter == 'E')
                             InsertDataAtCell(searchAt, letter.ToString(), lineCounter, worksheetPart, spreadSheet);
+                        else if (letter == 'F')
+                            InsertDataAtCell(departureStation, letter.ToString(), lineCounter, worksheetPart, spreadSheet);
+                        else if (letter == 'G')
+                            InsertDataAtCell(arrivalStation, letter.ToString(), lineCounter, worksheetPart, spreadSheet);
                 }
 
-                lineCounter = 1;
+                uint mostStationCounter = 1;
 
                 for (var letter = 'A'; letter <= 'F'; letter++)
                     if (letter == 'A')
-                        InsertDataAtCell("Number", letter.ToString(), lineCounter, worksheetPart2, spreadSheet);
+                        InsertDataAtCell("Number", letter.ToString(), mostStationCounter, worksheetPart2, spreadSheet);
                     else if (letter == 'B')
-                        InsertDataAtCell("Name", letter.ToString(), lineCounter, worksheetPart2, spreadSheet);
+                        InsertDataAtCell("Name", letter.ToString(), mostStationCounter, worksheetPart2, spreadSheet);
                     else if (letter == 'C')
-                        InsertDataAtCell("Contract", letter.ToString(), lineCounter, worksheetPart2, spreadSheet);
+                        InsertDataAtCell("Contract", letter.ToString(), mostStationCounter, worksheetPart2, spreadSheet);
                     else if (letter == 'D')
-                        InsertDataAtCell("Adress", letter.ToString(), lineCounter, worksheetPart2, spreadSheet);
+                        InsertDataAtCell("Adress", letter.ToString(), mostStationCounter, worksheetPart2, spreadSheet);
                     else if (letter == 'E')
-                        InsertDataAtCell("Occurence", letter.ToString(), lineCounter, worksheetPart2, spreadSheet);
+                        InsertDataAtCell("Occurence", letter.ToString(), mostStationCounter, worksheetPart2, spreadSheet);
                     else if (letter == 'F')
-                        InsertDataAtCell("Type", letter.ToString(), lineCounter, worksheetPart2, spreadSheet);
+                        InsertDataAtCell("Type", letter.ToString(), mostStationCounter, worksheetPart2, spreadSheet);
 
                 for (var i = 0; i < stationStatistics.Count; i++)
                 {
-                    lineCounter++;
+                    mostStationCounter++;
 
                     for (var letter = 'A'; letter <= 'F'; letter++)
                         if (letter == 'A')
                             InsertDataAtCell(stationStatistics[i].station.number.ToString(), letter.ToString(),
-                                lineCounter, worksheetPart2, spreadSheet);
+                                mostStationCounter, worksheetPart2, spreadSheet);
                         else if (letter == 'B')
-                            InsertDataAtCell(stationStatistics[i].station.name, letter.ToString(), lineCounter,
+                            InsertDataAtCell(stationStatistics[i].station.name, letter.ToString(), mostStationCounter,
                                 worksheetPart2, spreadSheet);
                         else if (letter == 'C')
-                            InsertDataAtCell(stationStatistics[i].station.contractName, letter.ToString(), lineCounter,
+                            InsertDataAtCell(stationStatistics[i].station.contractName, letter.ToString(), mostStationCounter,
                                 worksheetPart2, spreadSheet);
                         else if (letter == 'D')
-                            InsertDataAtCell(stationStatistics[i].station.address, letter.ToString(), lineCounter,
+                            InsertDataAtCell(stationStatistics[i].station.address, letter.ToString(), mostStationCounter,
                                 worksheetPart2, spreadSheet);
                         else if (letter == 'E')
-                            InsertDataAtCell(stationStatistics[i].occurence.ToString(), letter.ToString(), lineCounter,
+                            InsertDataAtCell(stationStatistics[i].occurence.ToString(), letter.ToString(), mostStationCounter,
                                 worksheetPart2, spreadSheet);
                         else if (letter == 'F')
-                            InsertDataAtCell(stationStatistics[i].type.ToString(), letter.ToString(), lineCounter,
+                            InsertDataAtCell(stationStatistics[i].type.ToString(), letter.ToString(), mostStationCounter,
                                 worksheetPart2, spreadSheet);
                 }
 

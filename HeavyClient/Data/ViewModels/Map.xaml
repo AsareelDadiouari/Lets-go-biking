@@ -35,9 +35,17 @@
                                 <Label Content="Departure:" FontSize="20" />
                                 <Label Content="Adress" FontSize="20" x:Name="DepartAdress" />
                             </StackPanel>
+                            <StackPanel x:Name="depStackPane" Orientation="Horizontal">
+                                <Label Content="Departure Station:" FontSize="20" />
+                                <Label Content="Name" FontSize="20" x:Name="DepartureStation" />
+                            </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="Arrival:" FontSize="20" />
                                 <Label Content="Adress" FontSize="20" x:Name="ArriveAdress" />
+                            </StackPanel>
+                            <StackPanel x:Name="arrStackPane" Orientation="Horizontal">
+                                <Label Content="Arrival Station:" FontSize="20" />
+                                <Label Content="Name" FontSize="20" x:Name="ArrivalStation" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <Label Content="Total Distance:" FontSize="20" />

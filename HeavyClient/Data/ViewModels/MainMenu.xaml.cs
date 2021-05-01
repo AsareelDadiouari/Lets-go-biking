@@ -35,7 +35,13 @@ namespace HeavyClient.Data.ViewModels
             AddStation(geoJsons[0].station, TypeStation.DEPARTURE);
             AddStation(geoJsons[geoJsons.Length - 1].station, TypeStation.ARRIVAL);
 
-            MainWindow.routeSearches.Add(departure.Text + "-" + arrival.Text + "-");
+            if (geoJsons[0].station == null)
+                MainWindow.routeSearches.Add(departure.Text + "*" + arrival.Text);
+            else if (geoJsons[0].station != null && geoJsons[geoJsons.Length - 1].station != null)
+                MainWindow.routeSearches.Add(departure.Text + "*" + arrival.Text + "*"
+                                             + geoJsons[0].station.name + "[" + geoJsons[0].station.contractName +
+                                             "]*" + geoJsons[geoJsons.Length - 1].station.name + "[" + geoJsons[geoJsons.Length - 1].station.contractName +
+                                             "]");
 
             if (geoJsons.Length == 0)
             {

@@ -45,9 +45,9 @@ class Map extends Component {
                         :
                         <React.Fragment>
                             <div className="d-flex justify-content-between">
-                                <th>🔴Distance to Departure Station: {(this.state.coords[0].features[0].properties.summary.distance/1000).toFixed(2)} km</th>
-                                <th>🟡Departure Station to Arrival Station: {(this.state.coords[1].features[0].properties.summary.distance/1000).toFixed(2)} km</th>
-                                <th>🟢Arrival Station to Arrival: {(this.state.coords[2].features[0].properties.summary.distance/1000).toFixed(2)} km</th>
+                                <th><span role="img" aria-label="donut">🔴</span>Origin to Departure Station: {(this.state.coords[0].features[0].properties.summary.distance/1000).toFixed(2)} km</th>
+                                <th><span role="img" aria-label="donut">🟡</span>Departure Station to Arrival Station: {(this.state.coords[1].features[0].properties.summary.distance/1000).toFixed(2)} km</th>
+                                <th><span role="img" aria-label="donut">🟢</span>Arrival Station to Destination: {(this.state.coords[2].features[0].properties.summary.distance/1000).toFixed(2)} km</th>
                             </div>
                         </React.Fragment>
                 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import {Button, Spinner} from "reactstrap";
+import {Button} from "reactstrap";
 
 export class Home extends Component {
     static displayName = Home.name;
@@ -112,7 +112,7 @@ export class Home extends Component {
             <div>
                 <h1>Hello, world!</h1>
                 <div className="row justify-content-center align-self-center container">
-                    <img src="https://cdn.dribbble.com/users/2008861/screenshots/6491348/did-teen-biking-for-dribs_still_2x.gif?compress=1&resize=400x300" alt="biker image" />
+                    <img src="https://cdn.dribbble.com/users/2008861/screenshots/6491348/did-teen-biking-for-dribs_still_2x.gif?compress=1&resize=400x300" alt="biker" />
                     <div className="container">
                         <form>
                             <div className="form-group">
