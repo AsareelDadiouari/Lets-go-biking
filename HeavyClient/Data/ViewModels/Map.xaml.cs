@@ -249,6 +249,12 @@ namespace HeavyClient.Data.ViewModels
                     currentStation.occurence);
             }
 
+            foreach (var doc in documents.Skip(5))
+            {
+                var currentStation = doc.ConvertTo<StationStatistics>();
+                statsToSave.Add(currentStation);
+            }
+
             return pairs;
         }
     }

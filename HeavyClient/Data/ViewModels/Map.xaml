@@ -15,9 +15,9 @@
                     CredentialsProvider="CtZIdPSZBTCy9fZTEl71~wC65EwYLEkzMYSpTYg32nw~AoMVtPXE6rJFSrC0ybreB_BqDc1Im6VL36CaJIJUdtkh969Ca_apOmYTZtrO7jj-"
                     x:Name="MyMap" />
             </TabItem>
-            <TabItem Header="Details" x:Name="detailsItem" HorizontalAlignment="Right" Width="48">
+            <TabItem Header="Details" x:Name="detailsItem">
 
-                <Grid>
+                <Grid Width="Auto" Height="Auto">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />

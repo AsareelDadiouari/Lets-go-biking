@@ -18,7 +18,7 @@ namespace Routing
     {
         private static string urlWebProxyStations;
         private readonly List<Station> allStations;
-        private readonly string apiKey;
+        private readonly string openRouteServiceapiKey;
         private readonly WebOperationContext ctx;
         private readonly string responseDataFromAllStation;
         private readonly List<GeoCoordinate> StationsGeocoordinates;
@@ -28,7 +28,7 @@ namespace Routing
         public Service1()
         {
             urlWebProxyStations = "http://localhost:8733/Design_Time_Addresses/WebProxyService/Service1/rest/Stations";
-            apiKey = "5b3ce3597851110001cf6248689d473c044c43afb6cec015efc2fcc1";
+            openRouteServiceapiKey = "5b3ce3597851110001cf6248689d473c044c43afb6cec015efc2fcc1";
             ctx = WebOperationContext.Current;
 
             using (var webClient = new WebClient())
@@ -66,20 +66,20 @@ namespace Routing
             if (closestArrivalStation != null && closestDepartureStation != null)
             {
                 var fromStartClientToDepartStation =
-                    "https://api.openrouteservice.org/v2/directions/foot-walking?api_key=" + apiKey +
+                    "https://api.openrouteservice.org/v2/directions/foot-walking?api_key=" + openRouteServiceapiKey +
                     "&start=" + clientStart.longitude + "," + clientStart.latitude + "&end=" +
                     closestDepartureStation.position.longitude.ToString().Replace(",", ".") + "," +
                     closestDepartureStation.position.latitude.ToString().Replace(",", ".");
 
                 var fromDepartStationToEndStation =
-                    "https://api.openrouteservice.org/v2/directions/cycling-road?api_key=" + apiKey +
+                    "https://api.openrouteservice.org/v2/directions/cycling-road?api_key=" + openRouteServiceapiKey +
                     "&start=" + closestDepartureStation.position.longitude.ToString().Replace(",", ".") + "," +
                     closestDepartureStation.position.latitude.ToString().Replace(",", ".")
                     + "&end=" + closestArrivalStation.position.longitude.ToString().Replace(",", ".") + "," +
                     closestArrivalStation.position.latitude.ToString().Replace(",", ".");
 
                 var fromEndStationToEndClient = "https://api.openrouteservice.org/v2/directions/foot-walking?api_key=" +
-                                                apiKey +
+                                                openRouteServiceapiKey +
                                                 "&start=" +
                                                 closestArrivalStation.position.longitude.ToString().Replace(",", ".") +
                                                 "," + closestArrivalStation.position.latitude.ToString()
@@ -143,7 +143,7 @@ namespace Routing
             }
 
             var fromStartClientToEndClient = "https://api.openrouteservice.org/v2/directions/driving-car?api_key=" +
-                                             apiKey +
+                                             openRouteServiceapiKey +
                                              "&start=" + clientStart.longitude + "," + clientStart.latitude + "&end=" +
                                              clientEnd.longitude + "," + clientEnd.latitude;
 
