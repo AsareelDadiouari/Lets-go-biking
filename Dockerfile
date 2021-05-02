@@ -4,10 +4,10 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 
 WORKDIR /docker
 
-COPY ./Host/bin/Debug/Host.exe ./Host/bin/Debug/Host.exe
+COPY Host/bin/Debug/Host.exe Host/bin/Debug/Host.exe
 
-ADD ./Host/bin/Debug/Host.exe ./Host.exe
+ADD Host/bin/Debug/Host.exe Host.exe
 
 EXPOSE 9000
 
-ENTRYPOINT ["pwsh" ,"./Host.exe"]
+ENTRYPOINT ["pwsh","Host.exe"]
