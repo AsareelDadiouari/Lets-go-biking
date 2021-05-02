@@ -1,6 +1,13 @@
-FROM mcr.microsoft.com/dotnet/aspnet:5.0
+FROM microsoft/powershell:latest
 
+SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
+WORKDIR /docker
 
+COPY ./Host/bin/Debug/Host.exe ./Host/bin/Debug/Host.exe
 
-ENTRYPOINT ["dotnet", "NetCore.Docker.dll"]
+ADD ./Host/bin/Debug/Host.exe ./Host.exe
+
+EXPOSE 9000
+
+ENTRYPOINT ["pwsh" ,"./Host.exe"]
