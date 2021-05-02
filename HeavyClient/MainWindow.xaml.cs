@@ -31,11 +31,11 @@ namespace HeavyClient
 
         private void SetMenu()
         {
-            var logs = new MenuItem
+            /*var logs = new MenuItem
             {
                 Header = "Logs",
                 FontSize = 15
-            };
+            };*/
             var quit = new MenuItem
             {
                 Header = "Quit",
@@ -56,7 +56,7 @@ namespace HeavyClient
                 FontSize = 15
             };
 
-            mainItem.Items.Add(logs);
+            //mainItem.Items.Add(logs);
             mainItem.Items.Add(export);
             mainItem.Items.Add(quit);
 
