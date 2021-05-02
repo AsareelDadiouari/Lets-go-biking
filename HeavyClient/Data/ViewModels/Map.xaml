@@ -18,7 +18,7 @@
             <TabItem Header="Details" x:Name="detailsItem" >
                 <Grid ShowGridLines="True" Width="Auto" Height="Auto">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
@@ -28,48 +28,48 @@
                     </Grid.RowDefinitions>
 
                     <!-- Part 1 -->
-                        <StackPanel Background="Azure" Grid.Row="0" Grid.Column="0" Orientation="Vertical">
-                            <StackPanel Orientation="Horizontal">
-                                <Label Content="Departure:" FontSize="20" />
-                                <Label Content="Adress" FontSize="20" x:Name="DepartAdress" />
-                            </StackPanel>
-                            <StackPanel x:Name="depStackPane" Orientation="Horizontal">
-                                <Label Content="Departure Station:" FontSize="20" />
-                                <Label Content="Name" FontSize="20" x:Name="DepartureStation" />
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <Label Content="Arrival:" FontSize="20" />
-                                <Label Content="Adress" FontSize="20" x:Name="ArriveAdress" />
-                            </StackPanel>
-                            <StackPanel x:Name="arrStackPane" Orientation="Horizontal">
-                                <Label Content="Arrival Station:" FontSize="20" />
-                                <Label Content="Name" FontSize="20" x:Name="ArrivalStation" />
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <Label Content="Total Distance:" FontSize="20" />
-                                <Label Content="1000.2" FontSize="20" x:Name="Distance" />
-                            </StackPanel>
+                    <StackPanel Background="Azure" Grid.Row="0" Grid.Column="0" Orientation="Vertical" >
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Departure:" FontSize="20" />
+                            <Label Content="Adress" FontSize="20" x:Name="DepartAdress" />
+                        </StackPanel>
+                        <StackPanel x:Name="depStackPane" Orientation="Horizontal">
+                            <Label Content="Departure Station:" FontSize="20" />
+                            <Label Content="Name" FontSize="20" x:Name="DepartureStation" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Arrival:" FontSize="20" />
+                            <Label Content="Adress" FontSize="20" x:Name="ArriveAdress" />
+                        </StackPanel>
+                        <StackPanel x:Name="arrStackPane" Orientation="Horizontal">
+                            <Label Content="Arrival Station:" FontSize="20" />
+                            <Label Content="Name" FontSize="20" x:Name="ArrivalStation" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Total Distance:" FontSize="20" />
+                            <Label Content="1000.2" FontSize="20" x:Name="Distance" />
+                        </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Total Duration:" FontSize="20" />
                             <Label Content="1000.2" FontSize="20" x:Name="Duration" />
                         </StackPanel>
                     </StackPanel>
-                        <ListBox Background="Beige" Grid.Row="0" Grid.Column="1" x:Name="directions"  />
+                    <ListBox Background="Beige" Grid.Row="0" Grid.Column="2" x:Name="directions"  />
                     <!-- Part 2 -->
-                        <StackPanel Background="LightGoldenrodYellow" Grid.Row="1" Grid.Column="0" Orientation="Vertical">
-                            <Label FontWeight="Bold" Content="Most visited Stations" FontSize="30" />
-                            <StackPanel Orientation="Horizontal">
-                                <Label Content="Departure:" FontSize="20" />
-                                <Label Content="DepartureStation" x:Name="mostVDeparture" FontSize="20" />
-                            </StackPanel>
+                    <StackPanel Background="LightGoldenrodYellow" Grid.Row="1" Grid.Column="0" Orientation="Vertical">
+                        <Label FontWeight="Bold" Content="Most visited Stations" FontSize="30" />
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Departure:" FontSize="20" />
+                            <Label Content="DepartureStation" x:Name="mostVDeparture" FontSize="20" />
+                        </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Arrival:" FontSize="20" />
                             <Label Content="ArrivalStation" x:Name="mostVArrival" FontSize="20" />
                         </StackPanel>
 
-                        
+
                     </StackPanel>
-                    <liveCharts:CartesianChart Background="AliceBlue" Grid.Row="1" Grid.Column="1" x:Name="chart"  />
+                    <liveCharts:CartesianChart Background="AliceBlue" Grid.Row="1" Grid.Column="1" x:Name="chart" />
 
                 </Grid>
             </TabItem>

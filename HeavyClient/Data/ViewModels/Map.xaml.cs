@@ -176,8 +176,6 @@ namespace HeavyClient.Data.ViewModels
                             FontSize = 13,
                         });
                     }
-                   
-
                 dur += segment.duration;
                 dist += segment.distance;
             }
