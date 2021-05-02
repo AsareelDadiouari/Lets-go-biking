@@ -18,6 +18,11 @@ Quick start
 Launch All Modules of the project with a simple double click on:
         
     WindowsRun.cmd
+    
+Docker
+-----------
+* Docker Build: `` docker build --tag=host/biking .``
+* Docker Run: `` docker run --rm -it -v "pwd":/host host/biking ``
 
 Project Architecture
 -----------
