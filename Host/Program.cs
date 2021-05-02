@@ -17,12 +17,17 @@ namespace Host
 
         [DllImport("user32.dll")]
         static extern int SetWindowText(IntPtr hWnd, string text);
+
         private static void Main(string[] args)
         {
             var tProxy = new Thread(LaunchWebProxy);
             var tRouting = new Thread(LaunchRouting);
             var tNpmInstall = new Thread(LaunchNpmInstall);
             var tNpmStart = new Thread(LaunchNpmStart);
+
+            tProxy.Priority = ThreadPriority.Highest;
+            tRouting.Priority = ThreadPriority.AboveNormal;
+            tNpmStart.Priority = ThreadPriority.Normal;
             
             tProxy.Start();
             tRouting.Start();
@@ -38,11 +43,10 @@ namespace Host
                 tNpmStart.Start();
                 tNpmStart.Join();
             }
-            
+
             tProxy.Join();
             tRouting.Join();
 
-            
             if (tRouting.IsAlive == false || tProxy.IsAlive == false) tNpmStart.Interrupt();
         }
 
@@ -107,7 +111,7 @@ namespace Host
                     FileName = "npm.cmd",
                     Arguments = "install",
                     RedirectStandardOutput = false
-                }
+                },
             };
 
             npmInstallProcess.Start();
@@ -126,7 +130,8 @@ namespace Host
                     FileName = "npm.cmd",
                     Arguments = "start",
                     RedirectStandardOutput = false,
-                }
+                },
+                
             };
 
             npmStartProcess.Start();

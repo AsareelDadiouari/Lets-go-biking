@@ -56,17 +56,17 @@ namespace LightClient
             app.UseSpaStaticFiles();
             //app.UseAuthorization();
 
-            /* app.UseSpa(spa =>
+             app.UseSpa(spa =>
              {
                  spa.Options.SourcePath = "ClientApp";
 
                  if (env.IsDevelopment())
                  {
-                     //spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
+                     spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
                      spa.UseReactDevelopmentServer("http://localhost:3000");
-                     //spa.UseReactDevelopmentServer(npmScript: "start");
+                     spa.UseReactDevelopmentServer(npmScript: "start");
                  }
-             });*/
+             });
 
 
             app.UseRouting();

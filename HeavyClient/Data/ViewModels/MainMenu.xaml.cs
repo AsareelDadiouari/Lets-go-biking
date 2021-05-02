@@ -83,7 +83,7 @@ namespace HeavyClient.Data.ViewModels
                             name = sta.name,
                             number = sta.number
                         },
-                        occurence = 0
+                        occurence = 1
                     };
                     await stations.Document(sta.number.ToString()).SetAsync(stationStatistics);
                 }

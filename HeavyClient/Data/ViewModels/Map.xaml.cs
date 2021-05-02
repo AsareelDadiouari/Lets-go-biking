@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -114,7 +115,7 @@ namespace HeavyClient.Data.ViewModels
 
                         foreach (var loc in feature.value.geometry.coordinates)
                             routeLine3.Locations.Add(new Location(loc[1], loc[0]));
-
+                        
                         mapPolylines.Add(routeLine3);
 
                         var pin2 = new Pushpin
@@ -166,10 +167,16 @@ namespace HeavyClient.Data.ViewModels
             foreach (var segment in element.value.features[0].properties.segments)
             {
                 foreach (var step in segment.steps)
-                    directions.Items.Add(new ListBoxItem
                     {
-                        Content = step.instruction
-                    });
+                        byte[] bytes = Encoding.Default.GetBytes(step.instruction);
+
+                        directions.Items.Add(new ListBoxItem
+                        {
+                            Content = Encoding.UTF8.GetString(bytes),
+                            FontSize = 13,
+                        });
+                    }
+                   
 
                 dur += segment.duration;
                 dist += segment.distance;
