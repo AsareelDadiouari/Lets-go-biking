@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "let-s-go-biking",
+  "private_key_id": "99e66ab813b0bfd5acd7560e4c0d6b23615f41b5",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQC20v+p3oVCTtTe\nH4M/agYyKIVDrpDsc6htw8ubwS51JfSB6LL5bNw0KYnWRxxS5IbOkMKpqDop3VDQ\nE6RyDcn9EtaLzcwrauroZ6Vb7YUn4WewUl7zc7+vRGa7YGHZBK5L1eCQ87XZH2s8\nJWFPhHR9fDxX1VAaIiI8p02qGrqhn4+cGZNbkrHvIaqMVmpvGMhbipdyv0lHodfW\n2782m77HtK7KhKAUyDZDMCWXwkOEv/IyE/NCRU9R6+wRRMkRFUQRjzfHfwSYl915\naG8CtfeNKY0dRKq9qoUpHtwfzb3LX0xailqxk7w9iVcA+97Kc/U42A8ZVqv8nzT7\n/3MCdwzdAgMBAAECggEANkESdt4erKlJOWufntt/YDYvKgEtZ8YA1yYSD7Q57bDo\nSP790dAw3tfu3CR5Ls47hSRnaEKQlCjl2QHjPKeD6DLFcXKOotnVQUe0xj2L1ORq\nyWQAYn3YhhIl7HgzQVxGvyGGxW1Va0wMHiq3oIndqfmKzMP0Q/UaNOavQQoylVCM\nfZkLiGze21LUDUNQrYUHoIHc8CGnvsNfvUuPJGgz76hy3ETMSU7hVhgDHtLfWl1u\nyH4Ts0p8f3X7ST0IFQVbXdqkIDuotwaczYOURk/R/RLwJVSbnxQfLFcQZ1kGX2Od\nBV87Gsn5wpmRQ+9giRNYMGCsaribOMda9I7g0MncfwKBgQDmUmzgTYicKvpoGxyy\ndk7FTeQh71cmVT2Ew321arWt8BmiO+rbgQcfMYyOIMi+2eoiQEdmYnFRlCruvRA6\nOb5q7UPHsYFT7j+GwPg/ewpjKIwJdk8qAkyl3QOkDFbLjLJ4Gp1SqERamMvdQK4Q\nGMW5bf7aJK9HeUsg+voanl1XPwKBgQDLNPL0frPYGFxregUj0yWZEjl4anLVQpRB\n5v9kCSDXK6VqJkMl8uaMzi/4zpt0DXLKufT8ASJwTJryAYE4sgeVEROe2wfA/dwb\n4V0K/AKHwFsGdKWT9DbfpzefHD7KRs9dA13JIwk6jhojWXQFFzVJ6c9AdHWcbJn/\nKwu80NFQ4wKBgQCwHbz1MzRPvill671g1UhcZLgaHsq0HCADYfzA+UzdKShgvpJS\nsHICrz+7+mOmVDlNYXt3VbUy3SqLDXTYIQly9+SJUTkENbzLzMjGuc3yjrGuFpJo\nHAQCHGNJUMoZsYdSgX9lEhfactYIZAn1cwvWQ77JjZ2d+KizGlaefhP/vwKBgQC/\ngUgSeTH+Tn8S3uznJT+CsbUtsYxFRTi5nvxDB4NGpSCAGE0h/3edbVeycOv6BA6R\n1Yx2zo7pLJi9yANDLiyNJInMJPl6vQPp1oq8JmIwE2z1eYruE7J/NnTp41Gdifw0\n2U5Sl01EPNWPSOdZQNT8sneac+a/I25CFww5xsXtJwKBgQClEr+P+4ZCH3a96L5P\nVoClQVN7HhSGZ0rSMh/tMaoAnE8MpnKY9tP/V7eMI60YhnTbTghvKFQg0oZTg6Qv\nx8yo4PTIsJI75cslptFftOP/k8lbCZDzOeqHPfXsUcE6eQM/ElPw7y++Ei58m1jG\nd2nzDD3XtRJ6HCZwiVLUmjeBBA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-ojjpz@let-s-go-biking.iam.gserviceaccount.com",
+  "client_id": "116537878467415055174",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-ojjpz%40let-s-go-biking.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

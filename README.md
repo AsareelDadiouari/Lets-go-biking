@@ -9,7 +9,7 @@ Requirements
 -----------
 <ul>
     <li> <a href="https://nodejs.org/en/">Node</a></li>
-    <li> <a href="https://dotnet.microsoft.com/download">.NET CORE 3.1</a></li>
+    <li> <a href="https://dotnet.microsoft.com/download">.NET 6.0</a></li>
     <li> <a href="https://dotnet.microsoft.com/download/dotnet-framework/net472">.NET Framework v4.7.2</a></li>
 </ul>
 
